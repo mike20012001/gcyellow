@@ -1,0 +1,16 @@
+// Category Action
+export const ALL_CATEGORY = 'ALL_CATEGORY'
+
+
+// Restaurant Action
+export const REGISTER_RESTAURANT = 'REGISTER_RESTAURANT'
+export const UPDATE_RESTAURANT = 'UPDATE_RESTAURANT'
+export const GET_RESTAURANT = 'GET_RESTAURANT'
+export const GET_FILTERED_RESTAURANTS = 'GET_FILTERED_RESTAURANTS'
+export const GET_ALL_RESTAURANTS = 'GET_ALL_RESTAURANTS'
+export const GET_DETAIL = 'GET_DETAIL'
+export const GET_SELECTED = 'GET_SELECTED'
+export const GET_FOODLIST = 'GET_FOODLIST'
+// User Action
+
+// Menu Action

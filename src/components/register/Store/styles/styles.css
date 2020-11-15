@@ -1,0 +1,75 @@
+.store_form_input {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: #3a3a3a;
+    padding: 0 1rem;
+    border-bottom: 1px solid #aaaaaa;
+}
+
+.store_form_input:hover {
+    color: black;
+    font-weight: bold;
+    background: #6ea0fd;
+}
+
+.store_form_header {
+    display: flex;
+    justify-content: space-between;
+    background: #1e5fd8;
+    color: white;
+    font-weight: bolder;
+    padding: 0 1.5rem;
+    letter-spacing: 1rem;
+}
+
+.store_form_wrap form input {
+    height: 30px;
+    width: 50%;
+    background: white;
+    cursor: pointer;
+    outline: none;
+    border: 1px solid #333333;
+    border-radius: 5px;
+    padding: 0 10px;
+    margin: 4px 0;
+}
+
+.store_form_wrap form button {
+    height: 40px;
+    font-size: 1rem;
+    letter-spacing: 2rem;
+    color: white;
+    font-weight: bold;
+    background: green;
+    cursor: pointer;
+    outline: none;
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 0 10px;
+    margin: 5px 0;;
+}
+
+.store_form_wrap form button:hover {
+    color: yellow;
+    background: #1a8a3b;
+}
+
+
+.searchresult {
+    border-collapse: collapse;
+}
+
+.searchresult th {
+    background: #1e5fd8;
+    color: white;
+}
+
+.searchresult td {
+}
+
+.searchresult a:hover {
+    color: white;
+    background: red;
+
+}
