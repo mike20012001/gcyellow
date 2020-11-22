@@ -15,6 +15,7 @@ function DeliveryLocation() {
                         style={{width:'100px', border:'none', outline:'none'}}
                         name="deliverTo"
                         >
+                            <option value="전체">전체보기</option>
                             <option value="감호동">감호동</option>
                             <option value="교동">교동</option>
                             <option value="남산동">남산동</option>
@@ -37,13 +38,13 @@ function DeliveryLocation() {
                             <option value="황금동">황금동</option>
                     </select>
                 </div>
-                <Router>
+                {/* <Router>
                     <Switch>
                         <Route exact path="/" component={Categories} />
                         <Route exact path="/restaurant/:id" component={Restaurants} />
                         <Route path ='/restaurant/:id/:code' component={Menu} />
                     </Switch>
-                </Router>
+                </Router> */}
             </div>
             </div>
    

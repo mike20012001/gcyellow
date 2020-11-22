@@ -1,4 +1,4 @@
-import { GET_RESTAURANT, GET_FILTERED_RESTAURANTS, GET_DETAIL, GET_SELECTED, GET_ALL_RESTAURANTS, UPDATE_RESTAURANT, REGISTER_RESTAURANT } from '../actions/actionTypes'
+import { GET_RESTAURANT, GET_FILTERED_RESTAURANTS, GET_DETAIL, GET_SELECTED, GET_ALL_RESTAURANTS, UPDATE_RESTAURANT, REGISTER_RESTAURANT, DELETE_RESTAURANT } from '../actions/actionTypes'
 
 const restaurant = (restaurant = [], action) => {
     switch (action.type) {
@@ -22,6 +22,9 @@ const restaurant = (restaurant = [], action) => {
 
         case GET_SELECTED:
             return restaurant.filter((restaurant) => restaurant._id === action.payload)
+    
+        case DELETE_RESTAURANT:
+            return restaurant.filter((restaurant) => restaurant._id !== action.payload)
 
         default:
             return restaurant;

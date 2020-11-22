@@ -1,19 +1,19 @@
-.register_form_input {
+.store_form_input {
     display: flex;
     justify-content: space-between;
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     color: #3a3a3a;
     padding: 0 1rem;
     border-bottom: 1px solid #aaaaaa;
 }
 
-.register_form_input:hover {
+.store_form_input:hover {
     color: black;
     font-weight: bold;
     background: #6ea0fd;
 }
 
-.register_form_header {
+.store_form_header {
     display: flex;
     justify-content: space-between;
     background: #1e5fd8;
@@ -23,20 +23,19 @@
     letter-spacing: 1rem;
 }
 
-.register_form_wrap form input {
+.store_form_wrap form input {
     height: 30px;
     width: 50%;
-    font-size: 0.7rem;
     background: white;
     cursor: pointer;
     outline: none;
-    border: 1px solid gray;
+    border: 1px solid #333333;
     border-radius: 5px;
     padding: 0 10px;
     margin: 4px 0;
 }
 
-.register_form_wrap form button {
+.store_form_wrap form button {
     height: 40px;
     font-size: 1rem;
     letter-spacing: 2rem;
@@ -51,7 +50,7 @@
     margin: 5px 0;;
 }
 
-.register_form_wrap form button:hover {
+.store_form_wrap form button:hover {
     color: yellow;
     background: #1a8a3b;
 }

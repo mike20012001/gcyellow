@@ -1,38 +1,45 @@
 import React, { useState, useEffect } from 'react'
 import './styles/styles.css'
-import { useParams, useHistory } from 'react-router-dom'
+import FileBase from 'react-file-base64'
+import { useParams, useHistory, Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux';
 import { registerRestaurant, updateRestaurant } from '../../../actions/restaurantActions'
+import notAvailable from './styles/not-available.png'
 
 function RegStorePost() {
     const params = useParams();
     const history = useHistory();
     const dispatch = useDispatch();
     
+    const restaurantInfo = useSelector((state) => params.id ? state.restaurant.find((p) => p.restaurantCode === params.id) : "")
+
+    useEffect(() => {
+        if(restaurantInfo) setStoreInfo(restaurantInfo)
+    }, [restaurantInfo])
+    
     const [ storeInfo, setStoreInfo ] = useState({
         restaurantCode : "",
         restaurantName : "",
+        restaurantThumb: notAvailable,
+        restaurantFlyer: notAvailable,
+        restaurantFlyer2: notAvailable,
         restaurantOwner: "",
         ownerContact: "",
         restaurantCategory: "",
         workingHours: "",
         restaurantAddress: "",
-        restaurantLocalCurrency: "",
-        isDeliverable: "",
+        restaurantLocalCurrency: true,
+        isDeliverable: true,
         deliveryCoverage: "",
+        deliveryCondition: "",
         contact: "",
         minOrderAmount: "",
         deliveryCharge: "",
-        isClosed: ""
+        isClosed: false
     })
-    const { restaurantCode, restaurantName, restaurantOwner, ownerContact, restaurantCategory, workingHours, restaurantAddress, deliveryCoverage, contact, minOrderAmount, deliveryCharge } = storeInfo
     
-    const restaurantInfo = useSelector((state) => params.id ? state.restaurant.find((p) => p.restaurantCode === params.id) : null)
-
-    useEffect(() => {
-        if(restaurantInfo) setStoreInfo(restaurantInfo)
-    }, [restaurantInfo])
-
+    const { restaurantCode, restaurantName, restaurantOwner, restaurantThumb, restaurantFlyer, restaurantFlyer2, ownerContact, restaurantCategory, workingHours, restaurantAddress, deliveryCoverage, contact, minOrderAmount, deliveryCharge, deliveryCondition } = storeInfo
+    
 
     const onChange = (e) => {
         setStoreInfo({
@@ -74,14 +81,37 @@ function RegStorePost() {
     }
 
     return (
-        <div className="store_form_wrap">
+        <div className="register_form_wrap">
             <form onSubmit={onSubmit} style={{display:'flex', flexDirection:'column', justifyContent:'center', letterSpacing:'2px', textAlign:'center', fontSize:'0.9rem', lineHeight:'2.5rem' }}>
-                <div className="store_form_header">
+                <div className="register_form_header">
                     <div>항목</div><div>내용</div>
                 </div>
+                {restaurantInfo._id ? <div><button style={{width:'100%', letterSpacing:'unset'}}><Link to={{pathname:`/register/menu/post/${restaurantInfo.restaurantCode}`, state:{restaurantInfo}}}>메뉴보기/등록</Link></button></div> : ""}
 
-                <div className="store_form_input">
-                    <div>식별코드</div>
+                <div className="register_form_input">
+                    <div>카테고리</div>
+                    <select 
+                        style={{border:'none', outline:'none', background:'transparent', borderRadius:'5px'}}
+                        name="restaurantCategory"
+                        value={restaurantCategory}
+                        onChange={onChange}
+                    >
+                        <option value="choose">선택</option>
+                        <option value="K001">한식</option>
+                        <option value="K002">치킨</option>
+                        <option value="K003">피자/파스타</option>
+                        <option value="K004">햄버거</option>
+                        <option value="K005">족발/보쌈</option>
+                        <option value="J001">회/초밥</option>
+                        <option value="C001">중화요리</option>
+                        <option value="N001">야식</option>
+                        <option value="S001">분식</option>
+                        <option value="D001">커피/디저트</option>
+                    </select>
+                </div>
+
+                <div className="register_form_input">
+                    <div>고유코드</div>
                     <input
                         name="restaurantCode"
                         value={restaurantCode}
@@ -90,7 +120,7 @@ function RegStorePost() {
                     />
                 </div>
 
-                <div className="store_form_input">
+                <div className="register_form_input">
                     <div>상호명</div>
                     <input
                         name="restaurantName"
@@ -100,7 +130,44 @@ function RegStorePost() {
                     />
                 </div>
 
-                <div className="store_form_input">
+
+                <div className="register_form_input">
+                    <div>썸네일</div>
+                    <FileBase
+                        style={{color:'red'}}
+                        type="file"
+                        multiple={false}
+                        name="restaurantThumb"
+                        value={restaurantThumb}
+                        onDone={({base64}) => setStoreInfo({...storeInfo, restaurantThumb: base64})}
+                    />
+                </div>
+
+                <div className="register_form_input">
+                    <div>전단지</div>
+                    <FileBase
+                        style={{color:'red'}}
+                        type="file"
+                        multiple={false}
+                        name="restaurantFlyer"
+                        value={restaurantFlyer}
+                        onDone={({base64}) => setStoreInfo({...storeInfo, restaurantFlyer: base64})}
+                    />
+                </div>
+
+                <div className="register_form_input">
+                    <div>전단지2</div>
+                    <FileBase
+                        style={{color:'red'}}
+                        type="file"
+                        multiple={false}
+                        name="restaurantFlyer2"
+                        value={restaurantFlyer2}
+                        onDone={({base64}) => setStoreInfo({...storeInfo, restaurantFlyer2: base64})}
+                    />
+                </div>
+
+                <div className="register_form_input">
                     <div>대표자</div>
                     <input
                         name="restaurantOwner"
@@ -110,7 +177,7 @@ function RegStorePost() {
                     />
                 </div>
 
-                <div className="store_form_input">
+                <div className="register_form_input">
                     <div>대표자 연락처</div>
                     <input
                         name="ownerContact"
@@ -120,27 +187,17 @@ function RegStorePost() {
                     />
                 </div>
 
-                <div className="store_form_input">
-                    <div>음식종류</div>
-                    <input
-                        name="restaurantCategory"
-                        value={restaurantCategory}
-                        placeholder="예) 한식, 양식, 분식"
-                        onChange={onChange}
-                    />
-                </div>
-
-                <div className="store_form_input">
-                    <div>영업지 주소</div>
+                <div className="register_form_input">
+                    <div>매장 주소</div>
                     <input
                         name="restaurantAddress"
                         value={restaurantAddress}
                         placeholder="매장주소 입력"
-                        onChange={onChange}
+                        onChange={(e) => setStoreInfo({...storeInfo, restaurantAddress: e.target.value.split(' ')})}
                     />
                 </div>
 
-                <div className="store_form_input">
+                <div className="register_form_input">
                     <div>운영시간</div>
                     <input
                         name="workingHours"
@@ -150,7 +207,7 @@ function RegStorePost() {
                     />
                 </div>
 
-                <div className="store_form_input">
+                <div className="register_form_input">
                     <div>주문전화</div>
                     <input
                         name="contact"
@@ -160,7 +217,7 @@ function RegStorePost() {
                     />
                 </div>
 
-                <div className="store_form_input">
+                <div className="register_form_input">
                     <div>최소주문금액</div>
                     <input
                         name="minOrderAmount"
@@ -170,13 +227,13 @@ function RegStorePost() {
                     />
                 </div>
 
-                <div className="store_form_input">
+                <div className="register_form_input">
                     <div>지역 상품권 사용</div>
                     <label style={{display: 'flex', alignItems:'center', color:'green', fontWeight:'bolder'}}>가능<input
                         style={{width:'20px'}}
                         type="radio"
                         name="restaurantLocalCurrency"
-                        value={true}
+                        defaultValue={true}
                         onChange={onChange}
                     /></label>
                     <label style={{display: 'flex', alignItems:'center', color:'red', fontWeight:'bolder'}}>불가능
@@ -189,14 +246,14 @@ function RegStorePost() {
                     /></label>
                 </div>
 
-                <div className="store_form_input">
+                <div className="register_form_input">
                     <div>배달/퀵가능 여부</div>
                     <label style={{display: 'flex', alignItems:'center', color:'green', fontWeight:'bolder'}}>가능<input
                         style={{width:'20px'}}
                         type="radio"
                         name="isDeliverable"
-                        value={true}
-                        onChange={onChange}
+                        defaultValue={true}
+                        onChange={(e) => setStoreInfo({...storeInfo, isDeliverable: e.target.value})}
                     /></label>
                     <label style={{display: 'flex', alignItems:'center', color:'red', fontWeight:'bolder'}}>불가능
                     <input
@@ -204,33 +261,43 @@ function RegStorePost() {
                         type="radio"
                         name="isDeliverable"
                         value={false}
-                        onChange={onChange}
+                        onChange={(e) => setStoreInfo({...storeInfo, isDeliverable: e.target.value})}
                     /></label>
                 </div>
 
-                <div className="store_form_input">
+                <div className="register_form_input">
                     <div>배달지역</div>
                     {storeInfo.isDeliverable ? <input
                         name="deliveryCoverage"
                         value={deliveryCoverage}
                         placeholder="예) 신음동, 성내동"
-                        onChange={onChange}
+                        onChange={(e) => setStoreInfo({...storeInfo, deliveryCoverage: e.target.value.split(',')})}
                     /> : ""}
-
                 </div>
 
-                <div className="store_form_input">
-                    <div>배달료</div>
+                <div className="register_form_input">
+                    <div>기본 배달료</div>
                     {storeInfo.isDeliverable ?
                     <input
                         name="deliveryCharge"
                         value={deliveryCharge}
-                        placeholder="배달료 입력"
+                        placeholder="기본 배달료 입력"
                         onChange={onChange}
                     /> : ""}
                 </div>
 
-                <div className="store_form_input">
+                <div className="register_form_input">
+                    <div>동네별 배달료</div>
+                    {storeInfo.isDeliverable  ?
+                    <input
+                        name="deliveryCondition"
+                        value={deliveryCondition}
+                        placeholder="평화동 : 3000, 부곡동: 2000"
+                        onChange={onChange}
+                    /> : ""}
+                </div>
+
+                <div className="register_form_input">
                     <div>폐업여부</div>
                     <label style={{display: 'flex', alignItems:'center', color:'green', fontWeight:'bolder'}}>영업중
                     <input
@@ -238,6 +305,7 @@ function RegStorePost() {
                         type="radio"
                         name="isClosed"
                         value={false}
+                        checked={true}
                         onChange={onChange}
                     /></label>
                     <label style={{display: 'flex', alignItems:'center', color:'red', fontWeight:'bolder'}}>폐업
@@ -249,7 +317,7 @@ function RegStorePost() {
                         onChange={onChange}
                     /></label>
                 </div>
-                    <button>{params.id ? "수정" : "입력"}</button>
+                    <button>{restaurantInfo._id ? "수정" : "입력"}</button>
             </form>
         </div>
     )

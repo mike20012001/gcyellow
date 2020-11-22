@@ -1,69 +1,84 @@
-import React, { useState } from 'react'
-import axios from '../../../utils/axios'
-
+import React, { useState, useEffect } from 'react'
+import FileBase from 'react-file-base64'
+import { getCurrentStoreFoodList, addFood, editFood } from '../../../actions/menuActions'
+import { useParams } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import CurrentStoreList from './CurrentStoreList'
+import notAvailable from './styles/not-available.png'
 
 function RegMenuPost() {
-
+    const params = useParams();
+    const dispatch = useDispatch();
+    
+  //  const currentStoreList = useSelector((state) => params.id ? state.restaurant.find((p) => p.restaurantCode === params.id) : 'hi')
+  //  console.log(currentStoreList)
+//
+    const [ codeUndefined, setCodeUndefined ] = useState(false)
+    
+    if(params.id === undefined) {
+        setCodeUndefined(true)
+        params.id = ''
+    }
+    //  const restaurantInfo = useMemo(() => props.location.state.restaurantInfo, [props.location.state.restaurantInfo])
+    
+    
     const [ menuInfo, setMenuInfo ] = useState({
-        restaurantCode: "",
+        restaurantCode: params.id,
         categoryCode: "",
         foodName : "",
-        foodPhoto: "",
+        foodPhoto: notAvailable,
         foodPrice: "",
         foodDescription: "",
-        isAvailable: "",
-        isOnPromo: "",
-        mostSold: "",
-        isNewMenu: "",
+        isAvailable: true,
+        isOnPromo: false,
+        mostSold: false,
+        isNewMenu: false,
     })
+    
+    const { foodName, categoryCode, foodDescription, foodPrice, foodPhoto, restaurantCode } = menuInfo
+    
 
-    const { foodName, categoryCode, foodDescription, foodPrice, foodPhoto, isAvailable, isOnPromo, mostSold, restaurantCode } = menuInfo
+    useEffect(() => {
+        dispatch(getCurrentStoreFoodList(params.id))
+    }, [params.id, dispatch])
+    
+  //  console.log(currentStoreList)
 
     const onChange = (e) => {
+        console.log(menuInfo)
+    //    console.log(menuInfo)
         setMenuInfo({
             ...menuInfo, [e.target.name]: e.target.value
         })
     }
+    
 
-    const onSubmit = async (e) => {
-        e.preventDefault();
-        await axios.post('/menu/', menuInfo)
-        .then(res => (
-            alert('등록되었습니다.')
-        ))
-        .catch(err => (
-            alert('에러 발생')
-        ))
-    }
-
-    return (
-        <div className="storeinputpost">
-            <form onSubmit={onSubmit} style={{display:'flex', flexDirection:'column', justifyContent:'center', letterSpacing:'2px', textAlign:'center', fontSize:'0.9rem', lineHeight:'2.5rem' }}>
-                <div className="infoTable header">
+            return (
+                <div className="register_form_wrap">
+            <form style={{display:'flex', flexDirection:'column', justifyContent:'center', letterSpacing:'2px', textAlign:'center', fontSize:'0.9rem', lineHeight:'2.5rem' }}>
+                <div className="register_form_header">
                     <div>항목</div><div>내용</div>
                 </div>
 
-                <div className="storeInfoTable">
+                <div className="register_form_input">
                     <div>매장코드</div>
                     <input
                         name="restaurantCode"
                         value={restaurantCode}
-                        placeholder="음식점 이름"
-                        disabled={true}
-                    />
+                        disabled={!codeUndefined}
+                        onChange={(e) => setMenuInfo({...menuInfo, restaurantCode:e.target.value})}
+                        />
                 </div>
 
-                <div className="storeInfoTable">
+                <div className="register_form_input">
                     <div>음식분류</div>
                     <select 
-                        style={{border:'none', outline:'none', background:'lightblue', borderRadius:'5px'}}
+                        style={{border:'none', outline:'none', background:'transparent', borderRadius:'5px'}}
                         name="categoryCode"
                         value={categoryCode}
-                        placeholder="음식종류"
                         onChange={onChange}
-                        defaultValue="choose"
                     >
-                        <option value="choose" disabled={true}>선택</option>
+                        <option value="choose">선택</option>
                         <option value="K001">한식</option>
                         <option value="K002">치킨</option>
                         <option value="K003">피자/파스타</option>
@@ -77,77 +92,94 @@ function RegMenuPost() {
                     </select>
                 </div>
 
-                <div className="storeInfoTable">
+                <div className="register_form_input">
                     <div>메뉴이름</div>
                     <input
                         name="foodName"
                         value={foodName}
-                        placeholder="불닭볶음면"
                         onChange={onChange}
                     />
                 </div>
 
-                <div className="storeInfoTable">
+                <div className="register_form_input">
                     <div>음식설명</div>
                     <input
                         name="foodDescription"
                         value={foodDescription}
-                        placeholder="예) xx과 xx의 조합"
                         onChange={onChange}
                     />
                 </div>
 
-                <div className="storeInfoTable">
-                    <div>가격</div>
+                <div className="register_form_input">
+                    <div>음식가격</div>
                     <input
                         name="foodPrice"
                         value={foodPrice}
-                        placeholder="예) 25000"
+                        placeholder="숫자만 입력 (예) 25000"
                         onChange={onChange}
                     />
                 </div>
 
-                <div className="storeInfoTable">
+                <div className="register_form_input">
                     <div>음식사진</div>
-                    <input
+                    <FileBase
+                        style={{color:'red'}}
+                        type="file"
+                        multiple={false}
                         name="foodPhoto"
                         value={foodPhoto}
-                        onChange={onChange}
+                        onDone={({base64}) => setMenuInfo({...menuInfo, foodPhoto: base64})}
                     />
                 </div>
 
-                <div className="storeInfoTable">
-                    <div>판매여부</div>
-                    <input
-                        name="isAvailable"
-                        value={isAvailable}
-                        placeholder=""
-                        onChange={onChange}
-                    />
-                </div>
-
-                <div className="storeInfoTable">
+                <div className="register_form_input">
                     <div>할인여부</div>
-                    <input
+                    <div style={{display: 'flex', justifyContent:'space-between', width: '40%', fontWeight:'bolder'}}>
+                    <label style={{display: 'flex', alignItems:'center', color:'green', fontWeight:'bolder'}}>할인
+                        <input
+                        style={{width:'20px'}}
+                        type="radio"
                         name="isOnPromo"
-                        value={isOnPromo}
-                        placeholder=""
+                        value={true}
                         onChange={onChange}
-                    />
-                </div>
-
-                <div className="storeInfoTable">
-                    <div>인기메뉴</div>
+                    /></label>
+                    <label style={{display: 'flex', alignItems:'center', color:'red', fontWeight:'bolder'}}>정상
                     <input
-                        name="mostSold"
-                        value={mostSold}
-                        placeholder=""
+                        style={{width:'20px'}}
+                        type="radio"
+                        name="isOnPromo"
+                        value={false}
+                        defaultChecked
                         onChange={onChange}
-                    />
+                    /></label>
+                    </div>
                 </div>
 
-                <div className="storeInfoTable">
+                <div className="register_form_input">
+                    <div>인기메뉴</div>
+                    <div style={{display: 'flex', justifyContent:'space-between', width: '40%', fontWeight:'bolder'}}>
+                    <label style={{display: 'flex', alignItems:'center', color:'green', fontWeight:'bolder'}}>인기<input
+                        style={{width:'20px'}}
+                        type="radio"
+                        name="mostSold"
+                        value={true}
+                        onChange={onChange}
+                    /></label>
+                    <label style={{display: 'flex', alignItems:'center', color:'red', fontWeight:'bolder'}}>일반
+                    <input
+                        style={{width:'20px'}}
+                        type="radio"
+                        name="mostSold"
+                        value={false}
+                        defaultChecked
+                        onChange={onChange}
+                    /></label>
+                    </div>
+                </div>
+
+                <div className="register_form_input">
                     <div>신메뉴</div>
+                    <div style={{display: 'flex', justifyContent:'space-between', width: '40%', fontWeight:'bolder'}}>
                     <label style={{display: 'flex', alignItems:'center', color:'green', fontWeight:'bolder'}}>신규<input
                         style={{width:'20px'}}
                         type="radio"
@@ -161,11 +193,40 @@ function RegMenuPost() {
                         type="radio"
                         name="isNewMenu"
                         value={false}
+                        defaultChecked
                         onChange={onChange}
                     /></label>
+                    </div>
                 </div>
-                <button>입력</button>
+
+                <div className="register_form_input">
+                    <div>판매여부</div>
+                    <div style={{display: 'flex', justifyContent:'space-between', width: '40%', fontWeight:'bolder'}}>
+                    <label style={{display: 'flex', alignItems:'center', color:'green', fontWeight:'bolder'}}>판매<input
+                        style={{width:'20px'}}
+                        type="radio"
+                        name="isAvailable"
+                        value={true}
+                        defaultChecked
+                        onChange={onChange}
+                    /></label>
+                    <label style={{display: 'flex', alignItems:'center', color:'red', fontWeight:'bolder'}}>중단
+                    <input
+                        style={{width:'20px'}}
+                        type="radio"
+                        name="isAvailable"
+                        value={false}
+                        onChange={onChange}
+                    /></label>
+                    </div>
+                </div>
+                {/* <button onClick={() => dispatch(addFood(menuInfo))}>입력</button> */}
+                <button onClick={() => (menuInfo._id) ? dispatch(editFood(menuInfo._id, menuInfo)) : dispatch(addFood(menuInfo))}>입력</button>
             </form>
+            <hr style={{border: 'none', borderTop: '1px solid gray'}}/>
+            <div>
+                    <CurrentStoreList menuInfo={menuInfo} setMenuInfo={setMenuInfo} />
+            </div>
         </div>
     )
 }

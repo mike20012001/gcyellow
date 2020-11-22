@@ -16,8 +16,7 @@ const Register = () => {
                     <li><Link to='/register/menu/post'>등록</Link></li>
                 </ul>
             </div>
-            <div className="register_right">
-            </div>
+            <hr style={{border: 'none', borderTop: '1px solid gray'}}/>
         </div>
     )
 }

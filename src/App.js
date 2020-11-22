@@ -7,10 +7,13 @@ import DeliveryLocation from './components/body/location/deliveryLocation';
 import Register from './components/register/Register';
 import RegStore from './components/register/Store/RegStore';
 import RegStorePost from './components/register/Store/RegStorePost';
-import RegMenuForm from './components/register/Menu/RegMenuForm';
+import RegMenu from './components/register/Menu/RegMenu';
 import RegMenuPost from './components/register/Menu/RegMenuPost';
 
 import './App.css'
+import Categories from './components/body/category/Categories';
+import Restaurants from './components/body/restaurant/Restaurants';
+import Menu from './components/body/menu/Menu';
 
 const App = () => {
     const [ category, setCategory ] = useState(null)
@@ -25,14 +28,18 @@ const App = () => {
             <Router>
                 <Navigation />
                 <Route path='/register' component={Register} />
+                <Route path='/' component={DeliveryLocation} category={category} setCategory={setCategory} />
             <Switch>
+                <Route exact path='/' component={Categories} />
+                <Route exact path="/restaurant/:id" component={Restaurants} />
+                <Route path ='/restaurant/:id/:code' component={Menu} />
+
                 <Route exact path='/register/store' component={RegStore} />
                 <Route exact path='/register/store/post/' component={RegStorePost} />
                 <Route exact path='/register/store/post/:id' component={RegStorePost} />
-                <Route exact path='/register/menu' component={RegMenuForm} />
+                <Route exact path='/register/menu' component={RegMenu} />
                 <Route exact path='/register/menu/post' component={RegMenuPost} />
-
-                <Route exact path='/' component={DeliveryLocation} category={category} setCategory={setCategory} />
+                <Route path='/register/menu/post/:id' component={RegMenuPost} />
             </Switch>
         </Router>
         </div>

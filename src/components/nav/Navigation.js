@@ -7,7 +7,7 @@ const Navigation = () => {
             <div className="Navbar_top">
                 <div className="Navbar_mid">
                     <div className="Navbar_menu">
-                        <a href="/">GC Food</a>
+                        <a href="/">GC Page</a>
                     </div>
                     <div className="Navbar_menu">
                         <a href='/register'>등록메뉴</a>

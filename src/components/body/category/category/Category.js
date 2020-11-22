@@ -8,7 +8,7 @@ const Category = ({ list }) => {
                 <div className="body_container">
                     <div className="body_menu_wrap">
                         {!list.length ? 
-                            <Link to={`/restaurant/${list.categoryCode.toString()}`} key={list.categoryCode} >
+                            <Link to={`/restaurant/${list.categoryCode}`} key={list.categoryCode} >
                                 <div className='body_menu_category'><img src={list.thumbnail} alt="category"></img>
                                 <p className="category_name">{list.foodCategory}</p></div></Link>
                          : "로딩중"}
