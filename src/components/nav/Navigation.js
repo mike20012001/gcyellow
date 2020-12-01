@@ -1,17 +1,21 @@
 import React from 'react'
-import './styles/styles.css';
+import { Link } from 'react-router-dom'
+import Logo from '../../img/logo.svg'
+// import './styles/styles.css';
+
 
 const Navigation = () => {
     return (
-        <div>
-            <div className="Navbar_top">
-                <div className="Navbar_mid">
-                    <div className="Navbar_menu">
-                        <a href="/">GC Page</a>
-                    </div>
-                    <div className="Navbar_menu">
-                        <a href='/register'>등록메뉴</a>
-                    </div>
+        <div className="navigationbar_top" style={{maxWidth: '1024px', width:'100%'}}>
+            <div className="navigationbar" style={{display:'flex', justifyContent:'space-between', width:'100%'}}>
+                <div className="navigationbar" style={{display:'flex', justifyContent: 'center', width:'150px', alignItems:"center"}}>
+                    <Link to="/"><img src={Logo} height="50px" width="50px" alt=""/><p className="logoText" style={{color:"white", display:'inline', fontSize:'14px'}}>김천시</p></Link>
+                </div>
+                <div className="navigationbar" style={{display:'flex', justifyContent:'space-around', width:'60%', alignItems:"center"}}>
+                    <Link to='/'><i style={{fontSize:'1.2rem', color:'#333333'}}>F</i>OOD</Link>
+                    <Link to='/'><i style={{fontSize:'1.2rem', color:'#333333'}}>C</i>AFE</Link>
+                    {/* <Link to='/register'><img src={Scissors} height="40px" width="40px" />HAIR</Link> */}
+                    <Link to='/register'><i style={{fontSize:'1.2rem', color:'#333333'}}>L</i>OGIN</Link>
                 </div>
             </div>
         </div>

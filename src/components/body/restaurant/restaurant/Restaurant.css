@@ -7,8 +7,16 @@
 
 .restaurant {
     background: white;
-    border-radius: 10px;
+    border-radius: 3px;
+    border-radius: 2px;
+    box-shadow:  1px 1px 1px #c7c7c7, 
+                 -5px -1px 10px #ffffff;
     margin: 10px;
+}
+
+.restaurant:hover {
+    transition: ease-out 0.2s;
+    box-shadow: 1px 1px 2px 0px #333333;
 }
 
 .restaurant_card {
@@ -43,7 +51,8 @@
 .card_text_header {
     color: white;
     text-align: center;
-    background: red;
+    background: #cc4242;
+    border-radius: 3px;
     padding: 5px;
     font-size: 1rem;
     font-weight: bolder;

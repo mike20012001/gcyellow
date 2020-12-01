@@ -41,8 +41,7 @@ const RegStoreForm = () => {
 
                 <div>매장검색</div>
                 <form onSubmit={onSubmit}>
-                    <select name="searchKey" onChange={onChange} defaultValue="choose" style={{width:'100px'}}>
-                        <option disabled={true} value="choose">선택</option>
+                    <select name="searchKey" onChange={onChange} defaultValue="name" style={{width:'100px'}}>
                         <option value="name">상호검색</option>
                         <option value="code">코드검색</option>
                         <option value="owner">대표검색</option>
@@ -83,7 +82,7 @@ const RegStoreForm = () => {
                                     {result.restaurantCode}</Link></td>
                                     <td>{result.restaurantName} </td>
                                     <td>{result.owner} </td>
-                                    <td>{result.category} </td>
+                                    <td>{result.restaurantCategory} </td>
                                     <td>{result.address} </td>
                                     <td>{(result.review).length}개</td>
                                 </tr>

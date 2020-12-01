@@ -1,24 +1,24 @@
-import React, { useEffect} from 'react'
-import { useParams } from 'react-router-dom'
+import React from 'react'
 import { numberCommas } from '../../../utils/numbering'
-import { useDispatch } from 'react-redux'
-import { getRestaurantByCode } from '../../../actions/restaurantActions'
 
 const MenuHeader = ({ filtered }) => {
-    const params = useParams();
-    const dispatch = useDispatch()
-    const phoneNumber = filtered[0].contact
+
     return (
         <div>
-            <div style={{textAlign:'center', fontSize:"1.3rem", marginTop:'1rem'}}>
+            <div style={{textAlign:'center', fontSize:"1.3rem", marginTop:'0.8rem'}}>
                 <div style={{maxWidth: '700px', margin: '0 auto'}}>
                 {filtered.map( (c) => (
-                    <div key={c._id} style={{border: '1px solid gray'}} >
-                        <div style={{display: 'flex', background:'red', color: 'white', textAlign:'left', padding: '0 10px', fontSize:'1.1rem', fontWeight:'bold'}}> <p>{c.restaurantName}</p><p style={{position:'relative', top:'10px', left:'10px', fontSize:'10px', color:'yellow'}}><i>지역상품권</i></p></div>
-                        <p style={{fontSize:'0.8rem', textAlign:'left', color:'#333333', margin:'6px'}}>영업시간 : {c.workingHours}</p>
-                        <p style={{fontSize:'0.8rem', textAlign:'left', color:'#333333', margin:'6px'}}>배달지역 : {c.deliveryCoverage}</p>
-                        <p style={{fontSize:'0.8rem', textAlign:'left', color:'#333333', margin:'6px'}}>최소주문 : {numberCommas(c.minOrderAmount)}원</p>
-                        <p style={{fontSize:'1rem', textAlign:'center', color:'#333333', margin:'0px', background:'#333333', padding:'10px', color:'#FEFEFE', fontWeight:'bolder'}}>주문하기 : <a style={{color:'inherit'}}href={`tel://${phoneNumber}`}>{c.contact}</a></p>
+                    <div key={c._id} style={{border: '1px solid gray', borderRadius:'3px'}} >
+                        <div style={{display: 'flex', background:'#cc4242', color: 'white', textAlign:'left', padding: '7px 20px', fontSize:'1.1rem', fontWeight:'bold'}}>
+                            <p>{c.restaurantName}</p>
+                            {c.giftCard[0] !== "" ? <p style={{position:'relative', top:'0px', left:'10px', fontSize:'10px', color:'yellow'}}>
+                                <i style={{display:'flex', flexDirection:'row', width:'100%'}}>{c.giftCard.map( (d) => <i key={d} style={{border:'1px solid white', padding:'1px 5px', fontSize:'10px', margin:'0 2px', borderRadius:'2px'}}> {d} </i> )}</i></p> : ""}</div>
+                        <p style={{fontSize:'0.8rem', textAlign:'left', color:'#333333', margin:'15px'}}>영업시간 : {c.openingAt} ~ {c.closingAt}</p>
+                        {c.deliveryCoverage[0] !== "" ? <p style={{fontSize:'0.8rem', textAlign:'left', margin:'15px'}}>배달지역 : {numberCommas(c.deliveryCoverage.map((c) => ` ${c}`))}</p> : ""}
+                        {(c.minimumOrder).includes('문의') || (c.minimumOrder) === "" ?  <p style={{fontSize:'0.8rem', textAlign:'left', margin:'15px'}}>최소주문 : 문의 </p> : <p  style={{fontSize:'0.8rem', textAlign:'left', margin:'15px'}}>최소주문 : {numberCommas(c.minimumOrder)}원</p>}
+                        {(c.deliveryBasicCharge).includes('000') ? <p style={{fontSize:'0.8rem', textAlign:'left', margin:'15px'}}>기본배달료 : {numberCommas(c.deliveryBasicCharge)}원</p> : <p style={{fontSize:'0.8rem', textAlign:'left', margin:'15px'}}>기본배달료 : 문의</p>}
+                        {c.ownerComment ? <p style={{display: 'flex', alignItems: 'center', fontSize:'0.8rem', textAlign:'left', margin:'15px', fontWeight:'800', border:'1px solid red', height:"30px", color:"black", borderRadius:'2px'}}> &nbsp;사장님 Comment : {c.ownerComment}</p> : ""}
+                        <p style={{fontSize:'1rem', textAlign:'center', margin:'0px', background:'#333333', padding:'10px', color:'#FEFEFE', fontWeight:'bolder'}}>주문하기 : <a style={{color:'inherit'}} href={`tel://${c.orderCall}`}>{c.orderCall}</a></p>
                     </div>))}
                 </div>
             </div>

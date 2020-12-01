@@ -66,8 +66,8 @@ export const updateRestaurant = (id, updatedData) => async (dispatch) => {
 
 export const deleteRestaurant = (id) => async (dispatch) => {
     try {
-        const { data } = await api.deleteRestaurant(id);
-        dispatch({ type: DELETE_RESTAURANT, payload: data})
+        await api.deleteRestaurant(id);
+        dispatch({ type: DELETE_RESTAURANT, payload: id})
     } catch (error) {
         console.log(error)
     }

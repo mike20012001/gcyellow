@@ -26,4 +26,4 @@ const Restaurants = ({ setCategory }) => {
     )
 }
 
-export default Restaurants
+export default React.memo(Restaurants)

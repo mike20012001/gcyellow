@@ -58,18 +58,6 @@ const Submenu = () => {
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
   
-    
-    let arr = new Array([]);
-    const indexCount = () => {
-        let length = category.length
-        for (let i=0; i<length; i++) {
-            arr.push(i)
-        }
-        return arr
-    }
-
-    indexCount()
-
     const handleChange = (event, newValue) => {
       setValue(newValue);
     };

@@ -1,13 +1,10 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { deleteRestaurant } from '../../../actions/restaurantActions'
-import { getFilteredRestaurants } from '../../../actions/restaurantActions'
+import { getFilteredRestaurants, deleteRestaurant } from '../../../actions/restaurantActions'
 
-const RegStore = () => {
-       
+const RegStore = ({currentId, setCurrentId}) => {
     const dispatch = useDispatch();
-
     const filteredRestaurants = useSelector((state) => state.restaurant)
 
     const [ keyword, setKeyword ] = useState({
@@ -32,8 +29,8 @@ const RegStore = () => {
             }
         } 
 
-            return (
-                <div>
+    return (
+        <div style={{marginBottom:'5rem', borderBottom:'1px solid gray'}}>
             <div style={{display:'flex', flexDirection:'column', justifyContent:'center', letterSpacing:'2px', textAlign:'center', fontSize:'0.9rem', lineHeight:'2.5rem' }}>
 
                 <div>매장검색</div>
@@ -42,7 +39,6 @@ const RegStore = () => {
                         <option disabled={true} value="choose">선택</option>
                         <option value="restaurantName">상호검색</option>
                         <option value="restaurantCode">코드검색</option>
-                        <option value="restaurantOwner">대표검색</option>
                         <option value="restaurantAddress">매장위치</option>
                         <option value="restaurantCategory">음식종류</option>
                     </select>
@@ -66,25 +62,25 @@ const RegStore = () => {
                     <table className="searchresult" style={{width: '100%', fontSize:'0.7rem', letterSpacing:'0'}}>
                         <thead>
                             <tr>
-                                <th>코드</th><th>매장명</th><th>대표</th><th>종류</th><th>매장주소</th><th>삭제</th>
+                                <th>고유코드</th><th>매장명</th><th>연동</th><th>종류</th><th>매장주소</th><th>삭제</th>
                             </tr>
                         </thead>
                         <tbody>
                             {filteredRestaurants.length > -1 ? filteredRestaurants.map(result => (
                                 <tr key={result._id}>
-                                    <td><Link className="searchResult" to={`/register/store/post/${result.restaurantCode}`}>
+                                    <td onClick={() => setCurrentId(result._id)} style={{fontWeight:'bold'}}><Link className="searchResult" to={`/register/store/post/${result.restaurantCode}`}>
                                     {result.restaurantCode}</Link></td>
-                                    <td>{result.restaurantName}</td>
-                                    <td>{result.restaurantOwner}</td>
-                                    <td>{result.restaurantCategory}</td>
-                                    <td>{result.restaurantAddress}</td>
+                                    <td style={{textAlign:'left'}}>{result.restaurantName}</td>
+                                    {result.restaurantOwner ? <td>O</td> : <td>X</td>}
+                                    <td style={{fontWeight:'bold'}}>{result.restaurantCategory}</td>
+                                    <td style={{textAlign:'left'}}>{result.restaurantAddress}</td>
                                     {/* <td>{(result.restaurantReview) > -1 ? (result.restaurantReview).length : ""}개</td> */}
                                     <td><button onClick={() => dispatch(deleteRestaurant(result._id))}>X</button></td>
                                 </tr>
-                            )) : ""}
+                        )) : ""}
                         </tbody>
                     </table>
-                </div> : ""}
+                </div> : ""} 
             </div>
             
         </div>

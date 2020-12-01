@@ -30,10 +30,13 @@
 }
 
 .body_menu_category {
+    color: #333333;
     text-align: center;
-    border: 1px solid #d4d4d4;
+    font-weight: 500;
     overflow: hidden;
+    border: 1px solid #d4d4d4;
     border-radius: 3px;
+    padding: 1px;
 }
 
 .body_menu_category img {
@@ -41,8 +44,10 @@
     height: auto;
 }
 
-.body_menu_category img:hover {
-
+.body_menu_category:hover {
+    background: rgb(248, 37, 37);
+    color:white;
+    transition: ease-in-out 0.2s;
 }
 
 

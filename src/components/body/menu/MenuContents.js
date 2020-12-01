@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { numberCommas } from '../../../utils/numbering'
 
 const MenuContents = ({ foodList }) => {
+    
     return (
         <div style={{margin:'0 auto'}}>
             <div>
@@ -13,10 +14,11 @@ const MenuContents = ({ foodList }) => {
                         <div style={{marginLeft:'15px', fontSize:'0.8rem'}}>
                             <p style={{fontWeight:'bold', margin: '0', marginTop:'15px'}}>{c.foodName}</p>
                             <p style={{margin:'0', fontSize:'0.7rem'}}>{c.foodDescription}</p>
-                            <p>{numberCommas(c.foodPrice)}원</p>
+                            <p style={{fontWeight:'bold'}}>기본 : {numberCommas(c.foodPrice)}원 &nbsp;{(c.foodPriceOption !== undefined || "") ? "/  " + c.foodPriceOption : "" }</p>
                         </div>
                 </div>
                 )) : ""}
+
             </div>
         </div>
     )

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { deleteFoodMenu } from '../../../actions/menuActions'
+import { deleteFoodMenu } from '../../../../actions/menuActions'
 
 const CurrentStoreList = ({ menuInfo, setMenuInfo }) => {
     const foodList = useSelector((state) => state.menu)
@@ -18,12 +18,14 @@ const CurrentStoreList = ({ menuInfo, setMenuInfo }) => {
                         <p style={{fontSize:'0.9rem', color:'#333333', fontWeight:'bolder', margin: '30px auto 0 auto'}}>{c.foodName}</p>
                         <p style={{fontSize:'0.7rem', color:'#999999', fontWeight:'normal', margin: '0'}}>{c.foodDescription}</p>
                         <p style={{fontSize:'0.7rem', color:'#333333', fontWeight:'bold'}}>{c.foodPrice}원</p>
+                        <p style={{fontSize:'0.7rem', color:'#333333', fontWeight:'bold'}}>{c.foodPriceOption}</p>
                     </div>
                 </div> 
                 <div style={{display:'flex', justifyContent:'center'}}>
-                    <button style={{width:'30%', margin: '0'}} onClick={() => {setMenuInfo(c)}}>수정</button>
-                    <button style={{width:'30%', margin: '0'}} onClick={() => dispatch(deleteFoodMenu(c._id))}>삭제</button>
+                    <button style={{width:'30%', marginTop: '-14px', background: 'navy', color:'white'}} onClick={() => {setMenuInfo(c)}}>수정</button>
+                    <button style={{width:'30%', marginTop: '-14px', background:'red', color:'white'}} onClick={() => dispatch(deleteFoodMenu(c._id))}>삭제</button>
                 </div>
+                <hr />
             </div>
                 )) : ""}
                 </div>

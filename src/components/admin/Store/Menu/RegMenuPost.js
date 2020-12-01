@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import FileBase from 'react-file-base64'
-import { getCurrentStoreFoodList, addFood, editFood } from '../../../actions/menuActions'
+import { getCurrentStoreFoodList, addFood, editFood } from '../../../../actions/menuActions'
 import { useParams } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import CurrentStoreList from './CurrentStoreList'
 import notAvailable from './styles/not-available.png'
 
@@ -10,8 +10,8 @@ function RegMenuPost() {
     const params = useParams();
     const dispatch = useDispatch();
     
-  //  const currentStoreList = useSelector((state) => params.id ? state.restaurant.find((p) => p.restaurantCode === params.id) : 'hi')
-  //  console.log(currentStoreList)
+    const currentStoreList = useSelector((state) => params.id ? state.restaurant.find((p) => p.restaurantCode === params.id) : 'hi')
+    console.log(currentStoreList)
 //
     const [ codeUndefined, setCodeUndefined ] = useState(false)
     
@@ -28,30 +28,54 @@ function RegMenuPost() {
         foodName : "",
         foodPhoto: notAvailable,
         foodPrice: "",
+        foodPriceOption: "",
         foodDescription: "",
         isAvailable: true,
         isOnPromo: false,
         mostSold: false,
         isNewMenu: false,
+        restaurant: currentStoreList._id
     })
     
-    const { foodName, categoryCode, foodDescription, foodPrice, foodPhoto, restaurantCode } = menuInfo
+    const { foodName, categoryCode, foodDescription, foodPrice, foodPriceOption, foodPhoto, restaurantCode } = menuInfo
     
+
+    const clear = () => {
+        setMenuInfo({
+            restaurantCode: params.id,
+            categoryCode: "",
+            foodName : "",
+            foodPhoto: notAvailable,
+            foodPrice: "",
+            foodPriceOption: "",
+            foodDescription: "",
+            isAvailable: true,
+            isOnPromo: false,
+            mostSold: false,
+            isNewMenu: false,
+            restaurant: currentStoreList._id
+        })
+    }
 
     useEffect(() => {
         dispatch(getCurrentStoreFoodList(params.id))
     }, [params.id, dispatch])
-    
-  //  console.log(currentStoreList)
 
     const onChange = (e) => {
-        console.log(menuInfo)
-    //    console.log(menuInfo)
         setMenuInfo({
             ...menuInfo, [e.target.name]: e.target.value
         })
     }
     
+    const onSubmit = (e) => {
+        e.preventDefault();
+        if (menuInfo._id) {
+            dispatch(editFood(menuInfo._id, menuInfo))
+        } else {
+            dispatch(addFood(menuInfo))
+        }
+        clear()
+    }
 
             return (
                 <div className="register_form_wrap">
@@ -116,6 +140,16 @@ function RegMenuPost() {
                         name="foodPrice"
                         value={foodPrice}
                         placeholder="숫자만 입력 (예) 25000"
+                        onChange={onChange}
+                    />
+                </div>
+
+                <div className="register_form_input">
+                    <div>음식가격</div>
+                    <input
+                        name="foodPriceOption"
+                        value={foodPriceOption}
+                        placeholder="중:25000, 대:35000"
                         onChange={onChange}
                     />
                 </div>
@@ -221,7 +255,7 @@ function RegMenuPost() {
                     </div>
                 </div>
                 {/* <button onClick={() => dispatch(addFood(menuInfo))}>입력</button> */}
-                <button onClick={() => (menuInfo._id) ? dispatch(editFood(menuInfo._id, menuInfo)) : dispatch(addFood(menuInfo))}>입력</button>
+                <button onClick={onSubmit}>입력</button>
             </form>
             <hr style={{border: 'none', borderTop: '1px solid gray'}}/>
             <div>
