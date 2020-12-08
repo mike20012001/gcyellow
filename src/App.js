@@ -14,12 +14,20 @@ import Restaurants from './components/body/restaurant/Restaurants';
 import Menu from './components/body/menu/Menu';
 import GoBack from './components/goBack';
 import './App.css'
+import { loadUser } from './actions/authActions';
+import Register from './components/admin/Register';
 import Login from './components/body/auth/Login';
+// import AppNavbar from './components/body/nav/Navbar';
+
 
 const App = () => {
     const dispatch = useDispatch()
     const [ currentId, setCurrentId ] = useState(null)
     
+    useEffect( () => {
+        dispatch(loadUser());
+    })
+
     useEffect(() => {
         dispatch(getCategory())
     }, [currentId, dispatch])
@@ -27,9 +35,10 @@ const App = () => {
         return ( 
             <div className="App">
             <Router>
+                {/* <AppNavbar /> */}
                 <Navigation />
                 <Switch>
-                    <Route path='/register' component={Login} />
+                    <Route path='/register' component={Register} />
                     <Route path='/' component={MainSearchBar} />
                 </Switch>
                 <Switch>
@@ -37,7 +46,7 @@ const App = () => {
                     <Route exact path="/restaurant/:id" component={Restaurants} />
                     <Route path ='/restaurant/:id/:code' component={Menu} />
 
-        <Route exact path='/register/store' render={(props) => <RegStore {...props} currentId={currentId} setCurrentId={setCurrentId} /> } />
+                    <Route exact path='/register/store' render={(props) => <RegStore {...props} currentId={currentId} setCurrentId={setCurrentId} /> } />
                     <Route exact path='/register/store/post/' render={(props) => <RegStorePost {...props} currentId={currentId} setCurrentId={setCurrentId} /> } />
                     <Route exact path='/register/store/post/:id' render={(props) => <RegStorePost {...props} currentId={currentId} setCurrentId={setCurrentId} /> } />
                     <Route exact path='/register/menu' component={RegMenu} currentId={currentId} setCurrentId={setCurrentId} />
@@ -47,7 +56,7 @@ const App = () => {
                 <div style={{display: 'flex', justifyContent:'flex-end',maxWidth: '1024px', width:'97%', position:'fixed', bottom:'0', margin: '0 1rem 0.5rem 0'}}>
                 <GoBack />
                 </div>
-                Footer
+
         </Router>
         </div>
     )

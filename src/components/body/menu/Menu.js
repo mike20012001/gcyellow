@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { getFoodList } from '../../../actions/menuActions'
 import { useDispatch, useSelector } from 'react-redux'
 import Submenu from '../restaurant/restaurant/Submenu'
-import { useHistory } from 'react-router-dom'
 
 import Accordion from '@material-ui/core/Accordion'
 import AccordionSummary from '@material-ui/core/AccordionSummary'
@@ -111,7 +110,6 @@ const Menu = (props) => {
 export default Menu
 
 export function BlogData ({filtered}) {
-  const history = useHistory();
   const [ data, setData ] = useState({});
 
   if(filtered.length <= 0 ) {

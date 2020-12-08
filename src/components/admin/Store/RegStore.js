@@ -44,7 +44,7 @@ const RegStore = ({currentId, setCurrentId}) => {
                     </select>
                     
                     <input
-                        style={{width:'30%'}}
+                        style={{width:'30%', height:'22px'}}
                         type="text"
                         name="searchValue"
                         value={searchValue}

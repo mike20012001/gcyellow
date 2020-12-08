@@ -13,6 +13,8 @@ function MainSearchBar() {
     
     const { searchOption, searchKeyword } = values
 
+    
+
     return (
         <div>
             <div>

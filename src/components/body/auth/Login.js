@@ -1,20 +1,99 @@
-import React, {useState} from 'react'
-import Register from '../../admin/Register'
+import React, { useState, useEffect, useCallback } from 'react';
+import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input, NavLink, Alert } from 'reactstrap';
+import { connect } from 'react-redux';
+import { login } from '../../../actions/authActions';
+import { clearErrors } from '../../../actions/errorActions';
 
-const Login = () => {
-    const [ auth, setAuth ] = useState(false)
+const Login = ({ isAuthenticated, error, login, clearErrors }) => {
+  const [modal, setModal] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [msg, setMsg] = useState(null);
 
-    return (
-        <div>
-            <div style={{border: '1px solid black'}}>
-                <button onClick={() => setAuth(true)}>로그인</button>
-                <button onClick={() => setAuth(false)}>로그아웃</button>
-            </div>
-            {auth ? <div>
-            <Register />
-            </div> : ""}
-        </div>
-    )
-}
+  const handleToggle = useCallback(() => {
+    // Clear errors
+    clearErrors();
+    setModal(!modal);
+  }, [clearErrors, modal]);
 
-export default Login
+  const handleChangeEmail = (e) => setEmail(e.target.value);
+  const handleChangePassword = (e) => setPassword(e.target.value);
+
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+
+    const user = { email, password };
+
+    // Attempt to login
+    login(user);
+  };
+
+  useEffect(() => {
+    // Check for register error
+    if (error.id === 'LOGIN_FAIL') {
+      setMsg(error.msg);
+    } else {
+      setMsg(null);
+    }
+
+    // If authenticated, close modal
+    if (modal) {
+      if (isAuthenticated) {
+        handleToggle();
+      }
+    }
+  }, [error, handleToggle, isAuthenticated, modal]);
+
+  return (
+    <div>
+      <NavLink onClick={handleToggle} href="#" style={{color:"#ffffff", padding: '0'}}>
+      사업자 로그인
+      </NavLink>
+
+      <Modal isOpen={modal} toggle={handleToggle}>
+        <ModalHeader toggle={handleToggle}>사업자 로그인</ModalHeader>
+        <ModalBody>
+          {msg ? <Alert color="danger">{msg}</Alert> : null}
+          <Form>
+            <FormGroup>
+              <Label for="email">Email</Label>
+              <Input
+                type="email"
+                name="email"
+                id="email"
+                placeholder="Email"
+                className="mb-3"
+                onChange={handleChangeEmail}
+              />
+
+              <Label for="password">Password</Label>
+              <Input
+                type="password"
+                name="password"
+                id="password"
+                placeholder="Password"
+                className="mb-3"
+                onChange={handleChangePassword}
+              />
+              <Button
+                color="dark"
+                style={{ marginTop: '2rem' }}
+                block
+                onClick={handleOnSubmit}
+              >
+                Login
+              </Button>
+            </FormGroup>
+          </Form>
+        </ModalBody>
+      </Modal>
+    </div>
+  );
+};
+
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated,
+  error: state.error
+});
+
+export default connect(mapStateToProps, { login, clearErrors })(Login);

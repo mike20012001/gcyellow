@@ -4,7 +4,6 @@ import { numberCommas } from '../../../../utils/numbering'
 import './Restaurant.css'
 
 const Restaurant = ({ restaurant }) => {
-
     return (
         <div className="restaurant">
             {/* <Link to={{pathname:`/restaurant/${restaurant.restaurantCategory}/${restaurant.restaurantCode}`, state: {name: restaurant} }}> */}
@@ -18,7 +17,7 @@ const Restaurant = ({ restaurant }) => {
                     {(restaurant.minimumOrder).includes('문의') || (restaurant.minimumOrder) === "" ?  <p className="card_text" style={{fontWeight:'bold'}} >최소주문 : 문의 </p> : <p className="card_text" style={{fontWeight:'bold'}}>최소주문 : {numberCommas(restaurant.minimumOrder)}원</p>}
                     {restaurant.giftCard[0] !== "" ? <p className="card_text" >상 품 권 : 사용가능 </p> : ""}
                     {restaurant.deliveryCoverage[0] !== "" ? <p className="card_text" >배달지역 : {numberCommas(restaurant.deliveryCoverage.map((c) => ` ${c}`))}</p> : ""}
-                    {(restaurant.deliveryBasicCharge).includes('000') ? <p className="card_text"  style={{fontWeight:'bold'}}>기본배달료 : {numberCommas(restaurant.deliveryBasicCharge)}원</p> : "" }
+                    {(restaurant.deliveryBasicCharge).includes('000') ? <p className="card_text" style={{fontWeight:'bold'}}>기본배달료 : {numberCommas(restaurant.deliveryBasicCharge)}원</p> : "" }
                 </div>
                 <div className="thumb">
                     <img src={restaurant.restaurantThumbnail} alt='thumbnail'></img>

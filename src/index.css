@@ -1,7 +1,9 @@
 body {
     margin: 0;
-    font-family: 'Nanum Gothic', sans-serif;
+    font-family: 'Nanum Gothic', sans-serif !important;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-size: 12px;
+    position: relative;
+    min-height: 90vh;
   }

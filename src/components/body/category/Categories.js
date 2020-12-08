@@ -1,9 +1,29 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import Category from './category/Category'
+import Logout from '../auth/Logout'
+import Signup from '../auth/Signup'
+import Login from '../auth/Login'
 
 const Categories = () => {
     const categories = useSelector((state) => state.category)
+
+    const auth = useSelector((state) => state.auth)
+
+    const loggedInUser = (
+        <div>
+            <Logout />
+        </div>
+    )
+
+    const guest = (
+        <div style={{display:'flex',flexDirection:'column'}}>
+            <Login />
+            <Signup />
+            {/* <Link to='/register'><i style={{fontSize:'1.2rem', color:'#333333'}}>L</i>OGIN</Link> */}
+        </div>
+    )
+
 
     return (
         <div>
@@ -16,6 +36,16 @@ const Categories = () => {
                             <Category key={list._id} list={list} />
                         )) : "로딩중"}
                     </div>
+                </div>
+            </div>
+                <hr />
+            <div className="ft" style={{display:'flex', position: 'relative', justifyContent:'space-around', alignItems:'center', fontSize:'0.7rem'}}>
+                <div style={{zIndex:'9999', textAlign:'left'}}>
+                {auth && auth.isAuthenticated ? loggedInUser : guest}
+                </div>
+                <div style={{textAlign:'left'}}>
+                    문의<br/>
+                    scheme.mike@gmail.com
                 </div>
             </div>
         </div>
