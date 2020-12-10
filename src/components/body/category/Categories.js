@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import Category from './category/Category'
 import Logout from '../auth/Logout'
@@ -12,12 +13,13 @@ const Categories = () => {
 
     const loggedInUser = (
         <div>
+            <Link to='/register'>메뉴등록</Link>
             <Logout />
         </div>
     )
 
     const guest = (
-        <div style={{display:'flex',flexDirection:'column'}}>
+        <div style={{display:'flex', flexDirection:'column'}}>
             <Login />
             <Signup />
             {/* <Link to='/register'><i style={{fontSize:'1.2rem', color:'#333333'}}>L</i>OGIN</Link> */}

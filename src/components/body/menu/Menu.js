@@ -137,8 +137,8 @@ export function BlogData ({filtered}) {
             <a href={c.link} target="_blank" rel="noreferrer">
               {ReactHtmlParser(c.title)}</a>
               </div>) : ""}
-        <div style={{display:'flex', alignItems:'center' ,justifyContent:'space-between'}}>
-          <b>* 검색결과는 다른내용을 포함 할 수도 있습니다.</b>
+        <div style={{display:'flex', alignItems:'center', justifyContent:'space-between', color:'red'}}>
+          <b>* 블로그 리뷰가 없는 경우, 다른 리뷰가 표시될 수 있습니다.</b>
           <font style={{border:'1px solid gray', padding:'5px 10px', fontSize:'0.6rem'}}>powered by <b style={{color:'green'}}>NAVER</b> openAPI</font>
         </div>
       </div>

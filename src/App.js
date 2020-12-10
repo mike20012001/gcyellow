@@ -16,7 +16,8 @@ import GoBack from './components/goBack';
 import './App.css'
 import { loadUser } from './actions/authActions';
 import Register from './components/admin/Register';
-import Login from './components/body/auth/Login';
+// import Login from './components/body/auth/Login';
+import SearchbarArea from './components/body/searchbar/SearchbarArea';
 // import AppNavbar from './components/body/nav/Navbar';
 
 
@@ -39,7 +40,8 @@ const App = () => {
                 <Navigation />
                 <Switch>
                     <Route path='/register' component={Register} />
-                    <Route path='/' component={MainSearchBar} />
+                    {/* <Route path='/' component={MainSearchBar} /> */}
+                    <Route path='/' component={SearchbarArea} />
                 </Switch>
                 <Switch>
                     <Route exact path='/' component={Categories} />

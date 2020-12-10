@@ -33,7 +33,7 @@ function RegStorePost({ currentId, setCurrentId }) {
     }, [])
     
     
-    const restaurantInfo = useSelector((state) => currentId ? state.restaurant.find((p) => p._id === currentId) : null)
+    const restaurantInfo = useSelector((state) => currentId ? state.restaurant.find((p) => p._id === currentId) : '')
     
     useEffect(() => {
         if(restaurantInfo) setStoreInfo(restaurantInfo)
@@ -95,7 +95,7 @@ const isClosedChangeEvent = () => {
 
 
     const onSubmit = async (e) => {
-        e.preventDefault();
+        // e.preventDefault();
         console.log('onSubmit data ====>',storeInfo)
         if(restaurantInfo) {
             dispatch(updateRestaurant(currentId, storeInfo))
@@ -103,7 +103,7 @@ const isClosedChangeEvent = () => {
             dispatch(registerRestaurant(storeInfo))
         }
         clear()
-        window.location.reload()
+        // window.location.reload()
     }
     return (
         <div className="register_form_wrap">
@@ -155,7 +155,7 @@ const isClosedChangeEvent = () => {
 
 
                 <div className="register_form_input">
-                    <div>썸네일</div>
+                    <div>썸네일{restaurantInfo.restaurantThumbnail ===  null ? "OK" : "NO"}</div>
                     <FileBase
                         style={{color:'red'}}
                         type="file"
@@ -167,7 +167,7 @@ const isClosedChangeEvent = () => {
                 </div>
 
                 <div className="register_form_input">
-                    <div>전단지</div>
+                    <div>전단지{restaurantInfo.restaurantFlyer ? "OK" : "NO"}</div>
                     <FileBase
                         style={{color:'red'}}
                         type="file"
@@ -179,7 +179,7 @@ const isClosedChangeEvent = () => {
                 </div>
 
                 <div className="register_form_input">
-                    <div>전단지2</div>
+                    <div>전단지2{restaurantInfo.restaurantFlyer2 ? "OK" : "NO"}</div>
                     <FileBase
                         style={{color:'red'}}
                         type="file"

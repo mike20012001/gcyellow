@@ -1,5 +1,6 @@
 import { GET_RESTAURANT, GET_FILTERED_RESTAURANTS, GET_DETAIL, GET_ALL_RESTAURANTS, UPDATE_RESTAURANT, REGISTER_RESTAURANT, DELETE_RESTAURANT } from '../actions/actionTypes'
 import * as api from '../api/restaurantApi'
+import { tokenConfig } from './authActions'
 
 export const getRestaurant = (id) => async (dispatch) => {
     try {
@@ -45,18 +46,20 @@ export const getAllRestaurants = () => async (dispatch) => {
     }
 }
 
-export const registerRestaurant = (registerData) => async (dispatch) => {
+export const registerRestaurant = (registerData) => async (dispatch, getState) => {
     try {
-        const { data } = await api.registerRestaurant(registerData);
+        const { data } = await api.registerRestaurant(registerData, tokenConfig(getState));
+        console.log('registerRestaurant', data)
         dispatch({ type: REGISTER_RESTAURANT, payload: data})
     } catch (error) {
         console.log(error)
     }
 }
 
-export const updateRestaurant = (id, updatedData) => async (dispatch) => {
+export const updateRestaurant = (id, updatedData) => async (dispatch, getState) => {
     try {
-        const { data } = await api.updateRestaurant(id, updatedData);
+        const { data } = await api.updateRestaurant(id, updatedData, tokenConfig(getState));
+        console.log('restaurantAction', data)
         dispatch({ type: UPDATE_RESTAURANT, payload: data})
     } catch (error) {
         console.log(error)
@@ -64,11 +67,12 @@ export const updateRestaurant = (id, updatedData) => async (dispatch) => {
 }
 
 
-export const deleteRestaurant = (id) => async (dispatch) => {
+export const deleteRestaurant = (id) => async (dispatch, getState) => {
     try {
-        await api.deleteRestaurant(id);
+        await api.deleteRestaurant(id, tokenConfig(getState));
         dispatch({ type: DELETE_RESTAURANT, payload: id})
     } catch (error) {
         console.log(error)
     }
 }
+

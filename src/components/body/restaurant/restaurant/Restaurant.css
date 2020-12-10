@@ -19,6 +19,20 @@
     box-shadow: 1px 1px 2px 0px #333333;
 }
 
+.restaurantVIP {
+    background: white;
+    border-radius: 3px;
+    border-radius: 2px;
+    box-shadow:  1px 1px 1px #c7c7c7, 
+                 -5px -1px 10px #ffffff;
+    margin: 10px;
+}
+
+.restaurantVIP:hover {
+    transition: ease-out 0.1s;
+    box-shadow: 1px 1px 2px 0px #0066ff;
+}
+
 .restaurant_card {
     color: #333333;
     padding: 15px;

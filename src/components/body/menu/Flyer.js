@@ -12,7 +12,8 @@ const Flyer = ({ filtered }) => {
 
     return (
         <div>
-            {filtered.length > 0 ? <img src={filtered[0].restaurantFlyer} alt="flyer" width="100%" /> : "다시 시도"}
+            {filtered.length > 0 ? <img src={filtered[0].restaurantFlyer} alt="flyer" width="100%" /> : ""}
+            {filtered[0].restaurantFlyer2.length > 100 ? <img src={filtered[0].restaurantFlyer2} alt="flyer" width="100%" /> : ""}
         </div>
     )
 }
