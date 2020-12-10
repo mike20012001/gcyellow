@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { getCategory } from './actions/categoryActions'
 import Navigation from './components/nav/Navigation';
-import MainSearchBar from './components/body/searchbar/MainSearchbar';
+// import MainSearchBar from './components/body/searchbar/MainSearchbar';
 import RegStore from './components/admin/Store/RegStore';
 import RegStorePost from './components/admin/Store/RegStorePost';
 import RegMenu from './components/admin/Store/Menu/RegMenu';
