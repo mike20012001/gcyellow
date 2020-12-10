@@ -81,7 +81,6 @@ const Menu = (props) => {
             <Submenu />
             <div>
                 <MenuHeader filtered={filtered} />
-                <BlogData filtered={filtered} />
                 <Accordion style={{background: 'transparent', maxWidth: '740px', width:'100%', margin: '5px auto', boxShadow:'none'}}>
                     <AccordionSummary expandIcon={<ExpandMoreIcon />} >
                     <AppBar position="static" style={{background:'transparent', color: 'black', boxShadow:'none'}}>
@@ -102,6 +101,7 @@ const Menu = (props) => {
                       </TabPanel>
                     </AccordionDetails>
                 </Accordion>
+                <BlogData filtered={filtered} />
             </div>                 
         </div>
     )
