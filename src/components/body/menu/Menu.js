@@ -3,10 +3,10 @@ import { getFoodList } from '../../../actions/menuActions'
 import { useDispatch, useSelector } from 'react-redux'
 import Submenu from '../restaurant/restaurant/Submenu'
 
-import Accordion from '@material-ui/core/Accordion'
-import AccordionSummary from '@material-ui/core/AccordionSummary'
-import AccordionDetails from '@material-ui/core/AccordionDetails'
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+// import Accordion from '@material-ui/core/Accordion'
+// import AccordionSummary from '@material-ui/core/AccordionSummary'
+// import AccordionDetails from '@material-ui/core/AccordionDetails'
+// import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
@@ -81,26 +81,20 @@ const Menu = (props) => {
             <Submenu />
             <div>
                 <MenuHeader filtered={filtered} />
-                <Accordion style={{background: 'transparent', maxWidth: '740px', width:'100%', margin: '5px auto', boxShadow:'none'}}>
-                    <AccordionSummary expandIcon={<ExpandMoreIcon />} >
                     <AppBar position="static" style={{background:'transparent', color: 'black', boxShadow:'none'}}>
                         <Tabs value={value} onChange={handleChange} aria-label="simple tabs example" centered>
                         <Tab label="전단" {...a11yProps(0)} style={{paddingTop:'0', marginTop: '0'}}/>
-                        <Tab label="메뉴(준비중)" {...a11yProps(1)} style={{paddingTop:'0', marginTop: '0'}} />
+                        <Tab label="메뉴(준비중)" {...a11yProps(1)} style={{paddingTop:'0', marginTop: '0'}} disabled />
                         </Tabs>
                     </AppBar>
                     {/* <p style={{fontSize:'1rem', fontWeight:'bold', margin: '0'}}>메뉴</p> */}
-                    </AccordionSummary>
-                    <AccordionDetails style={{width: '90%', border: '1px solid gray', margin: '0 auto'}}>
-                      <TabPanel value={value} index={0}>
+                      <TabPanel value={value} index={0} >
                         <Flyer filtered={filtered}/>
                       </TabPanel>
                       <TabPanel value={value} index={1}>
                         {/* <MenuContents foodList={foodList}/> */}
-                        <p style={{textAlign:'center', maxWidth:'550px', width: '550px', margin: '0 auto'}}>준비중입니다.</p>
+                        <p style={{textAlign:'center', maxWidth:'550px', margin: '0 auto'}}>준비중입니다.</p>
                       </TabPanel>
-                    </AccordionDetails>
-                </Accordion>
                 <BlogData filtered={filtered} />
             </div>                 
         </div>
@@ -146,3 +140,30 @@ export function BlogData ({filtered}) {
   )
 }
 
+// <div className={classes.root}>
+// <Submenu />
+// <div>
+//     <MenuHeader filtered={filtered} />
+//     <Accordion style={{background: 'transparent', maxWidth: '740px', width:'100%', margin: '5px auto', boxShadow:'none'}}>
+//         <AccordionSummary expandIcon={<ExpandMoreIcon />} >
+//         <AppBar position="static" style={{background:'transparent', color: 'black', boxShadow:'none'}}>
+//             <Tabs value={value} onChange={handleChange} aria-label="simple tabs example" centered>
+//             <Tab label="전단" {...a11yProps(0)} style={{paddingTop:'0', marginTop: '0'}}/>
+//             <Tab label="메뉴(준비중)" {...a11yProps(1)} style={{paddingTop:'0', marginTop: '0'}} />
+//             </Tabs>
+//         </AppBar>
+//         {/* <p style={{fontSize:'1rem', fontWeight:'bold', margin: '0'}}>메뉴</p> */}
+//         </AccordionSummary>
+//         <AccordionDetails style={{width: '90%', border: '1px solid gray', margin: '0 auto'}}>
+//           <TabPanel value={value} index={0} >
+//             <Flyer filtered={filtered}/>
+//           </TabPanel>
+//           <TabPanel value={value} index={1}>
+//             {/* <MenuContents foodList={foodList}/> */}
+//             <p style={{textAlign:'center', maxWidth:'550px', width: '550px', margin: '0 auto'}}>준비중입니다.</p>
+//           </TabPanel>
+//         </AccordionDetails>
+//     </Accordion>
+//     <BlogData filtered={filtered} />
+// </div>                 
+// </div>

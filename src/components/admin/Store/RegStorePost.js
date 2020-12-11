@@ -52,11 +52,10 @@ function RegStorePost({ currentId, setCurrentId }) {
         })
     }
     
-    
-    const clear = () => {
-        setStoreInfo({ restaurantCategory:'', restaurantCode: getRandom, restaurantName:'', restaurantAddress:'', openingAt:'', closingAt:'', dayOff:'', orderCall:'', restaurantThumbnail: notAvailable, restaurantFlyer: notAvailable, restaurantFlyer2: notAvailable, acceptGiftCard: '', giftCard: "", isDeliverable: '',  deliveryCoverage: '', deliveryBasicCharge: '', deliveryChargeByArea: '', minimumOrder: '', hasContract: '', contractToken: '', contractExp: '', orderIndex: '',  bizRegNo: '',  tags: '', isClosed: false, isDeleted: false, description: ''
-        })
-    }
+    // const clear = () => {
+    //     setStoreInfo({ restaurantCategory:'', restaurantCode: getRandom, restaurantName:'', restaurantAddress:'', openingAt:'', closingAt:'', dayOff:'', orderCall:'', restaurantThumbnail: notAvailable, restaurantFlyer: notAvailable, restaurantFlyer2: notAvailable, acceptGiftCard: '', giftCard: "", isDeliverable: '',  deliveryCoverage: '', deliveryBasicCharge: '', deliveryChargeByArea: '', minimumOrder: '', hasContract: '', contractToken: '', contractExp: '', orderIndex: '',  bizRegNo: '',  tags: '', isClosed: false, isDeleted: false, description: ''
+    //     })
+    // }
 
 // 상품권 허용여부
 
@@ -95,14 +94,26 @@ const isClosedChangeEvent = () => {
 
 
     const onSubmit = async (e) => {
-        // e.preventDefault();
+        e.preventDefault();
         console.log('onSubmit data ====>',storeInfo)
         if(restaurantInfo) {
             dispatch(updateRestaurant(currentId, storeInfo))
+            .then( res => 
+                window.location.reload()
+                )
+            .catch (err => 
+                alert('나중에 다시 시도해주세요')
+                )
         } else {
             dispatch(registerRestaurant(storeInfo))
+            .then( res => 
+                window.location.reload()
+                )
+            .catch (err => 
+                alert('나중에 다시 시도해주세요')
+                )
         }
-        clear()
+        // clear()
         // window.location.reload()
     }
     return (
