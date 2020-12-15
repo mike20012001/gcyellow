@@ -23,12 +23,12 @@ const Restaurants = () => {
              <div className="restaurants">
              {restaurantVIP ? restaurantVIP.map((c) => (
                 <RestaurantVIP key={c._id} restaurant={c} />
-            )) : ""}            
+            )) : <progress className="progress is-medium is-info" max="100" style={{display:'flex', justifyContent:'center', textAlign:'center'}} />}            
              </div>
              <div className="restaurants">
             {restaurant ? restaurant.map((c) => (
                 <Restaurant key={c._id} restaurant={c} />
-            )) : ""}
+            )) : <progress className="progress is-medium is-info" max="100" style={{display:'flex', justifyContent:'center', textAlign:'center'}} />}
         </div>
         </div>
     )

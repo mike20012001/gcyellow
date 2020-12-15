@@ -13,7 +13,7 @@ const Categories = () => {
 
     const loggedInUser = (
         <div>
-            <Link to='/register'>메뉴등록</Link>
+            {auth.user.role === "admin" ? <Link to='/register'>메뉴등록</Link> : ""}
             <Logout />
         </div>
     )
@@ -36,7 +36,7 @@ const Categories = () => {
                     <div className="body_menu_wrap">
                         {categories.length ? categories.map(list => (
                             <Category key={list._id} list={list} />
-                        )) : "로딩중"}
+                        )) : <progress className="progress is-medium is-info" max="100" />}
                     </div>
                 </div>
             </div>

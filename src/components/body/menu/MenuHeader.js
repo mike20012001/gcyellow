@@ -6,7 +6,7 @@ const MenuHeader = ({ filtered }) => {
     return (
         <div>
             <div style={{textAlign:'center', fontSize:"1.3rem", marginTop:'0.8rem'}}>
-                <div style={{maxWidth: '700px', margin: '0 auto'}}>
+                <div style={{maxWidth: '700px', margin: '0 auto', width:'97%'}}>
                 {filtered.map( (c) => (
                     <div key={c._id} style={{border: '1px solid gray', borderRadius:'3px'}} >
                         <div style={{display: 'flex', background:'#cc4242', color: 'white', textAlign:'left', padding: '7px 20px', fontSize:'1.1rem', fontWeight:'bold'}}>
