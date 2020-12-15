@@ -1,5 +1,5 @@
 import React from 'react'
-import Pizza from '../../../img/mainImg/pizza_main.jpg'
+import Pizza from '../../../img/mainImg/main.jpg'
 
 const SearchbarArea = () => {
     return (

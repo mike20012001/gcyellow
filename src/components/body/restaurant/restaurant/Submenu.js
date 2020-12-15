@@ -69,7 +69,7 @@ const Submenu = () => {
                 value={value}
                 onChange={handleChange}
                 indicatorColor="primary"
-                textColor="black"
+                textColor="inherit"
                 variant="scrollable"
                 scrollButtons="auto"
                 aria-label="scrollable auto tabs example"

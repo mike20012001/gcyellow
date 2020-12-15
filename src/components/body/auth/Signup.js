@@ -87,11 +87,11 @@ const Signup = ({ isAuthenticated, error, register, clearErrors}) => {
             </NavLink>
 
             <Modal isOpen={modal} toggle={handleToggle}>
-                <ModalHeader toggle={handleToggle}>회원가입 (사업자)</ModalHeader>
+                <ModalHeader toggle={handleToggle}>회원가입 (사업주님)</ModalHeader>
                 <ModalBody>
-                    {msg ? <Alert color="danger">{msg}</Alert> : null}
+                    {msg ? <Alert color="danger" style={{fontSize:'0.8rem', borderRadius:'0', padding:'5px 15px', fontWeight:'bold'}}>{msg}</Alert> : null}
                     <Form onSubmit={handleOnSubmit}>
-                        <FormGroup>
+                        <FormGroup style={{fontSize:'0.9rem', margin:'0', fontWeight:'bold'}}>
                         <Label for="name">이름</Label>
                         <Input
                             type="text"
@@ -99,6 +99,7 @@ const Signup = ({ isAuthenticated, error, register, clearErrors}) => {
                             id="name"
                             placeholder="홍길동"
                             className="mb-3"
+                            style={{outline:'none', border:'none', borderRadius:'0', borderBottom:'1px solid gray', fontSize:'0.8rem', padding:'20px 0 20px 70px', margin:'-39px 0px', width:'95%'}}
                             onChange={handleChangeName}
                         />
 
@@ -109,6 +110,7 @@ const Signup = ({ isAuthenticated, error, register, clearErrors}) => {
                             id="email"
                             placeholder="hello@gmail.com"
                             className="mb-3"
+                            style={{outline:'none', border:'none', borderRadius:'0', borderBottom:'1px solid gray', fontSize:'0.8rem', padding:'20px 0 20px 70px', margin:'-39px 0px', width:'95%'}}
                             onChange={handleChangeEmail}
                         />
 
@@ -119,6 +121,7 @@ const Signup = ({ isAuthenticated, error, register, clearErrors}) => {
                             id="password"
                             placeholder="패스워드"
                             className="mb-3"
+                            style={{outline:'none', border:'none', borderRadius:'0', borderBottom:'1px solid gray', fontSize:'0.8rem', padding:'20px 0 20px 70px', margin:'-39px 0px', width:'95%'}}
                             onChange={handleChangePassword}
                         />
 
@@ -127,14 +130,19 @@ const Signup = ({ isAuthenticated, error, register, clearErrors}) => {
                             type="text"
                             name="mobile"
                             id="mobile"
-                            placeholder="전화번호"
+                            placeholder="010-5555-6666"
                             className="mb-3"
+                            style={{outline:'none', border:'none', borderRadius:'0', borderBottom:'1px solid gray', fontSize:'0.8rem', padding:'20px 0 20px 70px', margin:'-39px 0px', width:'95%'}}
                             onChange={handleChangeMobile}
                         />
 
-                        <Button color="dark" style={{ marginTop: '2rem' }} block>
-                            Register
+                        <Button color="dark" style={{ marginTop: '2rem', borderRadius:'0' }} block>
+                            등록하기
                         </Button>
+                        <div style={{margin:'1.7rem 0', textAlign:'center'}}>
+                          현재는 사업주님의 회원가입만 가능하며,
+                          <p style={{fontSize:'0.8rem', fontWeight:'normal'}}><br/>*본 사이트는 중개료 / 수수료를 받지 않습니다.</p>
+                        </div>
                         </FormGroup>
                     </Form>
                     </ModalBody>
