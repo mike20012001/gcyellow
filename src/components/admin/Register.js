@@ -19,7 +19,7 @@ const Register = () => {
                 <ul style={{display: 'flex', paddingLeft: '20px'}}>
                     <li><Link to='/register/store/'>매장 검색/수정</Link></li>
                     <li>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
-                    <li><Link to='/register/store/post'>등록</Link></li>
+                    <li><a href='/register/store/post'>등록</a></li>
                     <li>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
                     <li><Link to='/register/store/post'>대표자 검색/수정</Link></li>
                 </ul>

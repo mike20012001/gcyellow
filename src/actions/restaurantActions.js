@@ -1,4 +1,4 @@
-import { GET_RESTAURANT, GET_FILTERED_RESTAURANTS, GET_DETAIL, GET_ALL_RESTAURANTS, UPDATE_RESTAURANT, REGISTER_RESTAURANT, DELETE_RESTAURANT } from '../actions/actionTypes'
+import { GET_RESTAURANT, GET_FILTERED_RESTAURANTS, GET_FILTERED_RESTAURANTS_BY_TAG, GET_DETAIL, GET_ALL_RESTAURANTS, UPDATE_RESTAURANT, REGISTER_RESTAURANT, DELETE_RESTAURANT } from '../actions/actionTypes'
 import * as api from '../api/restaurantApi'
 import { tokenConfig } from './authActions'
 
@@ -23,6 +23,15 @@ export const getFilteredRestaurants = (id) => async (dispatch) => {
     try {
         const { data } = await api.fetchFilteredRestaurants(id);
         dispatch({ type: GET_FILTERED_RESTAURANTS, payload: data })
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const getFilteredRestaurantsByTag = (id) => async (dispatch) => {
+    try {
+        const { data } = await api.fetchFilteredRestaurantsByTag(id);
+        dispatch({ type: GET_FILTERED_RESTAURANTS_BY_TAG, payload: data })
     } catch (error) {
         console.log(error)
     }

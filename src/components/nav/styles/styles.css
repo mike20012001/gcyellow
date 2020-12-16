@@ -80,3 +80,8 @@
 .navbar_bottom li {
     background: transparent;
 }
+
+
+.tag {
+    all: unset;
+}

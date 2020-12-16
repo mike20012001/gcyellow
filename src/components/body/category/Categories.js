@@ -42,7 +42,7 @@ const Categories = () => {
             </div>
                 <hr />
             <div className="ft" style={{display:'flex', position: 'relative', justifyContent:'space-around', alignItems:'center', fontSize:'0.7rem'}}>
-                <div style={{zIndex:'9999', textAlign:'left'}}>
+                <div style={{zIndex:'1', textAlign:'left'}}>
                 {auth && auth.isAuthenticated ? loggedInUser : guest}
                 </div>
                 <div style={{textAlign:'left'}}>

@@ -18,6 +18,7 @@ import { loadUser } from './actions/authActions';
 import Register from './components/admin/Register';
 // import Login from './components/body/auth/Login';
 import SearchbarArea from './components/body/searchbar/SearchbarArea';
+import SearchResult from './components/body/restaurant/SearchResult';
 // import AppNavbar from './components/body/nav/Navbar';
 
 
@@ -46,7 +47,9 @@ const App = () => {
                 <Switch>
                     <Route exact path='/' component={Categories} />
                     <Route exact path="/restaurant/:id" component={Restaurants} />
+                    <Route exact path="/restaurant/:id" component={Restaurants} />
                     <Route path ='/restaurant/:id/:code' component={Menu} />
+                    <Route path ='/searchresult/:keyword' component={SearchResult} />
 
                     <Route exact path='/register/store' render={(props) => <RegStore {...props} currentId={currentId} setCurrentId={setCurrentId} /> } />
                     <Route exact path='/register/store/post/' render={(props) => <RegStorePost {...props} currentId={currentId} setCurrentId={setCurrentId} /> } />

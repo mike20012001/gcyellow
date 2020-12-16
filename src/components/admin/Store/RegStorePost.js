@@ -32,7 +32,6 @@ function RegStorePost({ currentId, setCurrentId }) {
         return c
     }, [])
     
-    
     const restaurantInfo = useSelector((state) => currentId ? state.restaurant.find((p) => p._id === currentId) : '')
     
     useEffect(() => {

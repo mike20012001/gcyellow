@@ -98,3 +98,9 @@ p{
 .orderCall:hover {
     color: #333333 !important;
 }
+
+.tag {
+    min-width: 59.53px;
+    margin: 3px auto;
+    margin-right:3px;
+}

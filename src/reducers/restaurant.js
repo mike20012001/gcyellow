@@ -1,4 +1,4 @@
-import { GET_RESTAURANT, GET_FILTERED_RESTAURANTS, GET_DETAIL, GET_SELECTED, GET_ALL_RESTAURANTS, UPDATE_RESTAURANT, REGISTER_RESTAURANT, DELETE_RESTAURANT } from '../actions/actionTypes'
+import { GET_RESTAURANT, GET_FILTERED_RESTAURANTS, GET_DETAIL, GET_SELECTED, GET_ALL_RESTAURANTS, UPDATE_RESTAURANT, REGISTER_RESTAURANT, DELETE_RESTAURANT, GET_FILTERED_RESTAURANTS_BY_TAG } from '../actions/actionTypes'
 
 const restaurant = (restaurant = [], action) => {
     switch (action.type) {
@@ -12,6 +12,9 @@ const restaurant = (restaurant = [], action) => {
             return action.payload;
 
         case GET_FILTERED_RESTAURANTS:
+            return action.payload;
+
+            case GET_FILTERED_RESTAURANTS_BY_TAG:
             return action.payload;
 
         case GET_RESTAURANT:
