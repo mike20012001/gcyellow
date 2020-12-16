@@ -95,7 +95,9 @@ const Menu = (props) => {
                         {/* <MenuContents foodList={foodList}/> */}
                         <p style={{textAlign:'center', maxWidth:'550px', margin: '0 auto'}}>준비중입니다.</p>
                       </TabPanel>
+                      <hr />
                 <BlogData filtered={filtered} />
+                      <hr />
             </div>                 
         </div>
     )

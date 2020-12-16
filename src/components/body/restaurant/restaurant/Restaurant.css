@@ -65,7 +65,7 @@
 .card_text_header {
     color: white;
     text-align: center;
-    background: #cc4242;
+    background: #e84135;
     border-radius: 3px;
     padding: 5px;
     font-size: 1rem;
@@ -92,4 +92,9 @@ p{
     color: white;
     font-weight: bold;
     background: #333333;
+}
+
+
+.orderCall:hover {
+    color: #333333 !important;
 }

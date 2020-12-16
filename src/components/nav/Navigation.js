@@ -17,7 +17,7 @@ const Navigation = () => {
         }
     }
 
-    console.log(ModalOpen)
+    // console.log(ModalOpen)
 
     window.addEventListener('scroll', changeBackground)
 
