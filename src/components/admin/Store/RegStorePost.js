@@ -28,7 +28,7 @@ function RegStorePost({ currentId, setCurrentId }) {
     const getRandom = useMemo(() => {
         const a = Math.floor(Math.random() * 1000001)
         const b = randAlphabet(1)
-        const c =b+a
+        const c = b+a
         return c
     }, [])
     
@@ -132,15 +132,15 @@ const isClosedChangeEvent = () => {
                         onChange={(e) => setStoreInfo({...storeInfo, restaurantCategory:e.target.value})}
                     >
                         <option value="choose">선택</option>
-                        <option value="K001">한식/가정식</option>
-                        <option value="E001">피자/햄버거</option>
-                        <option value="C001">중화요리</option>
+                        <option value="K001">한식/국밥/면</option>
+                        <option value="E001">피자/양식</option>
+                        <option value="C001">중화/베트남</option>
                         <option value="K002">통닭/찜닭</option>
                         <option value="K004">족발/보쌈</option>
                         <option value="K005">야식</option>
+                        <option value="K006">찜요리</option>
                         <option value="J001">회/일식</option>
                         <option value="S001">분식</option>
-                        <option value="D001">커피/디저트</option>
                     </select>
                 </div>
 

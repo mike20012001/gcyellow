@@ -53,7 +53,7 @@ const Navigation = () => {
         <div className={navbar ? "navigationbar_top active" : "navigationbar_top"} style={{maxWidth: '1024px', width:'100%'}}>
             <div className="navigationbar" style={{display:'flex', justifyContent:'space-between', width:'100%'}}>
                 <div className="navigationbar" style={{display:'flex', justifyContent: 'center', width:'150px', alignItems:"center"}}>
-                    <Link to="/"><p className="logoText" style={{color:"#333333", display:'inline', fontSize:'14px'}}>김천시 배달음식점</p></Link>
+                    <Link to="/"><p className="logoText" style={{color:"#333333", display:'inline', fontSize:'16px'}}>김천시<br/>배달음식점</p></Link>
                 </div>
                 <div className="navigationbar" style={{display:'flex', justifyContent:'space-around', width:'60%', alignItems:"center"}}>
                     <button className="button is-small is-danger is-outlined" onClick={() => setModalOpen(true)}>검색하기</button>
@@ -84,9 +84,8 @@ const Navigation = () => {
                                 </form>
                                 <div style={{display:'flex', flexDirection:'column', padding: '10px', margin:'1rem', width:'30%'}}>
                                     <span className="tag is-danger">신음동</span><br/>
-                                    <span className="tag is-danger">된장찌개</span><br/>
-                                    <span className="tag is-danger">유로코피자</span><br/>
-                                    <span className="tag is-danger">민상이네</span>
+                                    <span className="tag is-danger">치킨</span><br/>
+                                    <span className="tag is-danger">떡볶이</span><br/>
                                 </div>
                             </div>
                         </div>

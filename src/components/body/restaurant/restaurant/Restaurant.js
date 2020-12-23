@@ -29,10 +29,10 @@ const Restaurant = ({ restaurant }) => {
                     <div><p className="tag is-info">배달지역</p>{restaurant.deliveryCoverage[0] !== "" ?
                         <p className="tag is-warning">{numberCommas(restaurant.deliveryCoverage.map((c) => ` ${c}`))}</p> :
                         <p className="tag is-danger">문의</p>}</div>
-
+{/* 
                     <div><p className="tag is-info">기본배달료</p>{(restaurant.deliveryBasicCharge).includes('000') ? 
                         <p className="tag is-warning">{numberCommas(restaurant.deliveryBasicCharge)}원</p> : 
-                        <p className="tag is-danger">문의</p> }</div>
+                        <p className="tag is-danger">문의</p> }</div> */}
 
                     {(restaurant.restaurantAddress) ? 
                         <p className="tag is-primary">{restaurant.restaurantAddress}</p> : 
