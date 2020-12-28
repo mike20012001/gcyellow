@@ -38,17 +38,18 @@ function RegStorePost({ currentId, setCurrentId }) {
         if(restaurantInfo) setStoreInfo(restaurantInfo)
     }, [restaurantInfo])
     
-    const [ storeInfo, setStoreInfo ] = useState({ restaurantCategory:'', restaurantCode: getRandom, restaurantName:'', restaurantAddress:'', openingAt:'', closingAt:'', dayOff:'', orderCall:'', restaurantThumbnail: notAvailable, restaurantFlyer: notAvailable, restaurantFlyer2: notAvailable, acceptGiftCard: giftCardAccepted, giftCard: "", isDeliverable: deliverableDisplaying,  deliveryCoverage: '', deliveryBasicCharge: '', deliveryChargeByArea: '', minimumOrder: '', hasContract: contract, contractToken: '', contractExp: '', orderIndex: '',  bizRegNo: '',  tags: '', isClosed: false, description: '', isDeleted: false
+    const [ storeInfo, setStoreInfo ] = useState({ restaurantCategory:'', restaurantCode: getRandom, restaurantName:'', restaurantBranch: '', restaurantAddress:'', restaurantOldAddress:'', openingAt:'', closingAt:'', dayOff:'', orderCall:'', restaurantThumbnail: notAvailable, restaurantFlyer: notAvailable, restaurantFlyer2: notAvailable, acceptGiftCard: giftCardAccepted, giftCard: "", isDeliverable: deliverableDisplaying,  deliveryCoverage: '', deliveryBasicCharge: '', deliveryChargeByArea: '', minimumOrder: '', hasContract: contract, contractToken: '', contractExp: '', orderIndex: '',  bizRegNo: '',  tags: '', isClosed: false, description: '', isDeleted: false
     })
     
     
-    const { restaurantCode, restaurantCategory, restaurantName, restaurantAddress, openingAt, closingAt, dayOff, orderCall, restaurantThumbnail, restaurantFlyer, restaurantFlyer2, isDeliverable, deliveryCoverage, deliveryBasicCharge, deliveryChargeByArea, minimumOrder, hasContract, contractExp, orderIndex, bizRegNo, tags, description
+    const { restaurantCode, restaurantCategory, restaurantName, restaurantBranch, restaurantAddress, restaurantOldAddress, openingAt, closingAt, dayOff, orderCall, restaurantThumbnail, restaurantFlyer, restaurantFlyer2, isDeliverable, deliveryCoverage, deliveryBasicCharge, deliveryChargeByArea, minimumOrder, hasContract, contractExp, orderIndex, bizRegNo, tags, description
     } = storeInfo
     
     const onChange = (e) => {
         setStoreInfo({
             ...storeInfo, [e.target.name]: e.target.value
         })
+        console.log(storeInfo)
     }
     
     // const clear = () => {
@@ -124,7 +125,7 @@ const isClosedChangeEvent = () => {
                 {currentId ? <div><button style={{width:'100%', letterSpacing:'unset'}}><Link to={{pathname:`/register/menu/post/${restaurantInfo.restaurantCode}`, state:{restaurantInfo}}}>메뉴보기/등록</Link></button></div> : ""}
 
                 <div className="register_form_input">
-                    <div>카테고리</div>
+                    <div className="post_title">카테고리</div>
                     <select 
                         style={{border:'none', outline:'none', background:'red', borderRadius:'5px'}}
                         name="restaurantCategory"
@@ -145,7 +146,7 @@ const isClosedChangeEvent = () => {
                 </div>
 
                 <div className="register_form_input">
-                    <div>고유코드</div>
+                    <div className="post_title">고유코드</div>
                     <input
                         name="restaurantCode"
                         value={restaurantCode}
@@ -153,19 +154,25 @@ const isClosedChangeEvent = () => {
                     />
                 </div>
 
-                <div className="register_form_input">
-                    <div>상호명</div>
+                <div className="register_form_input" id="restaurant">
+                    <div className="post_title">상호명</div>
                     <input
                         name="restaurantName"
                         value={restaurantName}
                         placeholder="음식점 이름"
+                        onChange={onChange}
+                        />
+                    <input
+                        name="restaurantBranch"
+                        value={restaurantBranch}
+                        placeholder="지점명"
                         onChange={onChange}
                     />
                 </div>
 
 
                 <div className="register_form_input">
-                    <div>썸네일{restaurantInfo.restaurantThumbnail ===  null ? "OK" : "NO"}</div>
+                    <div className="post_title">썸네일{restaurantInfo.restaurantThumbnail ===  null ? "OK" : "NO"}</div>
                     <FileBase
                         style={{color:'red'}}
                         type="file"
@@ -177,7 +184,7 @@ const isClosedChangeEvent = () => {
                 </div>
 
                 <div className="register_form_input">
-                    <div>전단지{restaurantInfo.restaurantFlyer ? "OK" : "NO"}</div>
+                    <div className="post_title">전단지{restaurantInfo.restaurantFlyer ? "OK" : "NO"}</div>
                     <FileBase
                         style={{color:'red'}}
                         type="file"
@@ -189,7 +196,7 @@ const isClosedChangeEvent = () => {
                 </div>
 
                 <div className="register_form_input">
-                    <div>전단지2{restaurantInfo.restaurantFlyer2 ? "OK" : "NO"}</div>
+                    <div className="post_title">전단지2{restaurantInfo.restaurantFlyer2 ? "OK" : "NO"}</div>
                     <FileBase
                         style={{color:'red'}}
                         type="file"
@@ -211,7 +218,7 @@ const isClosedChangeEvent = () => {
                 </div> */}
 
                 <div className="register_form_input">
-                    <div>매장주소</div>
+                    <div className="post_title">매장주소(도로명)</div>
                     <input
                         name="restaurantAddress"
                         value={restaurantAddress}
@@ -221,27 +228,33 @@ const isClosedChangeEvent = () => {
                 </div>
 
                 <div className="register_form_input">
-                    <div>영업시작</div>
+                    <div className="post_title">매장주소(지번)</div>
+                    <input
+                        name="restaurantOldAddress"
+                        value={restaurantOldAddress}
+                        placeholder="매장주소 입력"
+                        onChange={(e) => setStoreInfo({...storeInfo, restaurantOldAddress: e.target.value})}
+                    />
+                </div>
+
+                <div className="register_form_input" id="restaurant">
+                    <div className="post_title">영업시간</div>
                     <input
                         name="openingAt"
                         value={openingAt}
-                        placeholder="영업시간(10:00~22:00)"
+                        placeholder="10:00"
                         onChange={onChange}
                     />
-                </div>
-
-                <div className="register_form_input">
-                    <div>영업마감</div>
-                    <input
+                    ~<input
                         name="closingAt"
                         value={closingAt}
-                        placeholder="영업시간(10:00~22:00)"
+                        placeholder="22:00"
                         onChange={onChange}
                     />
                 </div>
 
                 <div className="register_form_input">
-                    <div>휴무일</div>
+                    <div className="post_title">휴무일</div>
                     <input
                         name="dayOff"
                         value={dayOff}
@@ -250,7 +263,7 @@ const isClosedChangeEvent = () => {
                 </div>
 
                 <div className="register_form_input">
-                    <div>주문전화</div>
+                    <div className="post_title">주문전화</div>
                     <input
                         name="orderCall"
                         value={orderCall}
@@ -260,7 +273,7 @@ const isClosedChangeEvent = () => {
                 </div>
 
                 <div className="register_form_input">
-                    <div>최소주문금액</div>
+                    <div className="post_title">최소주문금액</div>
                     <input
                         name="minimumOrder"
                         value={minimumOrder}
@@ -270,7 +283,7 @@ const isClosedChangeEvent = () => {
                 </div>
 
                 <div className="register_form_input">
-                    <div>지역화폐/상품권</div>
+                    <div className="post_title">지역화폐/상품권</div>
                     <label style={{display: 'flex', alignItems:'center', color:'green', fontWeight:'bolder'}}>가능
                     <input
                         style={{width:'20px'}}
@@ -321,7 +334,7 @@ const isClosedChangeEvent = () => {
                 </div> : ""}
 
                 <div className="register_form_input">
-                    <div>배달/퀵가능 여부</div>
+                    <div className="post_title">배달/퀵가능 여부</div>
                     <label style={{display: 'flex', alignItems:'center', color:'green', fontWeight:'bolder'}}>가능
                     <input
                         style={{width:'20px'}}
@@ -335,7 +348,7 @@ const isClosedChangeEvent = () => {
                 {deliverableDisplaying ? 
                 <div>
                 <div className="register_form_input">
-                    <div>배달지역</div>
+                    <div className="post_title">배달지역</div>
                     <input
                         name="deliveryCoverage"
                         value={deliveryCoverage}
@@ -345,7 +358,7 @@ const isClosedChangeEvent = () => {
                 </div>
 
                 <div className="register_form_input">
-                    <div>기본 배달료</div>
+                    <div className="post_title">기본 배달료</div>
                     <input
                         name="deliveryBasicCharge"
                         value={deliveryBasicCharge}
@@ -355,7 +368,7 @@ const isClosedChangeEvent = () => {
                 </div>
 
                 <div className="register_form_input">
-                    <div>동네별 배달료</div>
+                    <div className="post_title">동네별 배달료</div>
                     <input
                         name="deliveryChargeByArea"
                         value={deliveryChargeByArea}
@@ -368,7 +381,7 @@ const isClosedChangeEvent = () => {
 
 
                 <div className="register_form_input">
-                    <div>추가설명</div>
+                    <div className="post_title">추가설명</div>
                         <input
                         name="description"
                         value={description}
@@ -377,7 +390,7 @@ const isClosedChangeEvent = () => {
                 </div>
 
                 <div className="register_form_input">
-                    <div>계약여부</div>
+                    <div className="post_title">계약여부</div>
                     <label style={{display: 'flex', alignItems:'center', color:'red', fontWeight:'bolder'}}>계약여부
                         <input
                         style={{width:'20px'}}
@@ -409,7 +422,7 @@ const isClosedChangeEvent = () => {
                 </div> : "" }
 
                 <div className="register_form_input">
-                    <div>태그</div>
+                    <div className="post_title">태그</div>
                         <input
                         name="tags"
                         value={tags}
@@ -427,7 +440,7 @@ const isClosedChangeEvent = () => {
                 </div> */}
 
                 <div className="register_form_input">
-                    <div>사업자번호</div>
+                    <div className="post_title">사업자번호</div>
                     <input
                         name="bizRegNo"
                         value={bizRegNo}
@@ -436,7 +449,7 @@ const isClosedChangeEvent = () => {
                 </div>
 
                 <div className="register_form_input">
-                    <div>폐업여부</div>
+                    <div className="post_title">폐업여부</div>
                     <label style={{display: 'flex', alignItems:'center', color:'red', fontWeight:'bolder'}}>폐업
                     <input
                         style={{width:'20px'}}

@@ -20,7 +20,7 @@
 }
 
 .restaurantVIP {
-    background: #e7e7e7;
+    background: white;
     border-radius: 3px;
     border-radius: 2px;
     box-shadow:  1px 1px 1px #c7c7c7, 
@@ -33,7 +33,13 @@
     box-shadow: 1px 1px 2px 0px #ff0000;
 }
 
-.restaurant_card {
+.restaurant_card.active {
+    color: #333333;
+    padding: 15px;
+    height: auto;
+}
+.restaurant_card.inactive {
+    background: rgba(189, 189, 189, 0.9);
     color: #333333;
     padding: 15px;
     height: auto;
@@ -63,7 +69,18 @@
 }
 
 .card_text_header {
-    color: white;
+    color: #333333;
+    text-align: center;
+    /* background: #333333; */
+    border: 1px solid gray;
+    border-radius: 3px;
+    padding: 5px;
+    font-size: 1rem;
+    font-weight: bolder;
+}
+
+.card_text_header_VIP {
+    color: #fefefe;
     text-align: center;
     background: #333333;
     border-radius: 3px;

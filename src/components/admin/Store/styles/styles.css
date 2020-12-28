@@ -36,6 +36,10 @@
     margin: 4px 0;
 }
 
+.register_form_wrap #restaurant input {
+    width: 23%;
+}
+
 .register_form_wrap form button {
     height: 40px;
     font-size: 1rem;
@@ -54,6 +58,11 @@
 .register_form_wrap form button:hover {
     color: yellow;
     background: #1a8a3b;
+}
+
+.post_title {
+    width: 50%;
+    text-align: left;
 }
 
 
