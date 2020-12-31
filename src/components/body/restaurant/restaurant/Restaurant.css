@@ -14,6 +14,19 @@
     margin: 10px;
 }
 
+.restaurant.active {
+    background: white;
+    border-radius: 3px;
+    border-radius: 2px;
+    box-shadow:  1px 1px 1px #c7c7c7, 
+                 -5px -1px 10px #ffffff;
+    margin: 10px;
+}
+
+.restaurant.inactive {
+    display:none;
+}
+
 .restaurant:hover {
     transition: ease-out 0.2s;
     box-shadow: 1px 1px 2px 0px #333333;
@@ -121,6 +134,12 @@ p{
     margin: 3px auto;
     margin-right: 3px;
     font-size: 0.7rem !important;
+}
+
+.menuheaderContents {
+    font-size: 0.8rem;
+    text-align: left;
+    margin: 10px;
 }
 
 

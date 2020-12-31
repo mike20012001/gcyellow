@@ -49,7 +49,6 @@ function RegStorePost({ currentId, setCurrentId }) {
         setStoreInfo({
             ...storeInfo, [e.target.name]: e.target.value
         })
-        console.log(storeInfo)
     }
     
     // const clear = () => {

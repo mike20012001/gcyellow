@@ -30,6 +30,7 @@ const Restaurants = () => {
             {restaurant ? restaurant.map((c) => (
                 <Restaurant key={c._id} restaurant={c} />
             )) : "" }
+             
         </div>
         <hr style={{height: '10px', background: 'lightgray'}} />
         </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import {getFilteredRestaurantsByTag} from '../../actions/restaurantActions'
 import { Link, useHistory } from 'react-router-dom'
@@ -7,6 +7,7 @@ import './styles/styles.css'
 
 const Navigation = () => {
     const history = useHistory();
+    const searchInput = useRef();
     const auth = useSelector((state) => state.auth.user)
     const dispatch = useDispatch();
     const [ navbar, setNavbar ] = useState(false)
@@ -20,21 +21,21 @@ const Navigation = () => {
             setNavbar(false)
         }
     }
-
     window.addEventListener('scroll', changeBackground)
-
+    
     const onChange = (e) => {
         setKeyword({
             ...keyword, [e.target.name]: e.target.value
-         })
+        })
         //  console.log(keyword)
     }
-
+    
     const clear = () => {
         let resetField = document.getElementsByClassName('control')[0]
         resetField.reset();
+        searchInput.current.focus()
     }
-
+    
     const onSubmit = async (e) => {
         e.preventDefault();
         if (keyword === "") {
@@ -44,10 +45,9 @@ const Navigation = () => {
             dispatch(getFilteredRestaurantsByTag(keyword))
             setModalOpen(false)
             history.push(`/searchresult/${keyword.keyword}`)
-            }
-        } 
-
-
+        }
+    } 
+    
 
     return (
         <div className={navbar ? "navigationbar_top active" : "navigationbar_top"} style={{maxWidth: '1024px', width:'100%'}}>
@@ -77,6 +77,7 @@ const Navigation = () => {
                                     type="text"
                                     name='keyword'
                                     placeholder="여기에 입력하세요!" 
+                                    ref={searchInput}
                                     style={{borderRadius:"0", border:'0', width:'90%', borderBottom:'1px solid black' }}
                                     onChange={onChange}
                                     />
