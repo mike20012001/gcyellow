@@ -39,7 +39,7 @@ const MenuHeader = ({ filtered }) => {
                             <p className="menuheaderContents" ><b>매장주소</b> : {c.restaurantAddress} / {c.restaurantOldAddress ? c.restaurantOldAddress : "" } </p> :
                             "정보없음"}
 
-                        <p style={{fontSize:'10px', color:'red', textAlign:'left', padding:'10px 0px 0px 25px'}}><u style={{border: '1px solid black', padding:'1px 3px'}}>카드결제시 미리 말씀</u>해주셔야 하며, <u style={{border: '1px solid black', padding:'1px 3px'}}>배달료는 현금으로 기사님께</u> 전달 해주셔야 합니다.</p>
+                        <p style={{fontSize:'10px', color:'red', textAlign:'left', padding:'10px 0px 0px 25px'}}><u className="tag is-danger">카드결제시 미리!</u><u className="tag is-warning">배달료는 현금으로 기사님께!</u></p>
                         
                         {c.ownerComment ? <p style={{display: 'flex', alignItems: 'center', fontSize:'0.8rem', textAlign:'left', margin:'10px', fontWeight:'800', border:'1px solid red', height:"30px", color:"black", borderRadius:'2px'}}> &nbsp;사장님 Comment : {c.ownerComment}</p> : ""}
                         <p style={{fontSize:'1rem', textAlign:'center', margin:'10px 0', background:'#007bff', padding:'8px', color:'#FEFEFE', fontWeight:'bold'}}><a className="orderCall" style={{color:'inherit', padding: '20px 100px'}} href={`tel://${c.orderCall}`}>전화 주문하기</a></p>
