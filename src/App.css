@@ -29,7 +29,7 @@ button {
 
 .body_menu_wrap {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minMax(148px, auto));
+    grid-template-columns: repeat(auto-fit, minMax(177px, auto));
     /* grid-template-columns: repeat(auto-fill, minMax(223px, 1fr)); */
     --gap: 10;
     grid-gap: calc(var(--gap) * 1px);
@@ -41,17 +41,18 @@ button {
     text-align: center;
     overflow: hidden;
     border: 1px solid #d4d4d4;
-    border-radius: 3px;
-    padding: 1px;
+    border-radius: 5px;
     font-size: 14px;
 }
 
 .category_name {
     margin: 3px 0;
+    padding: 5px;
 }
 
 .body_menu_category img {
     max-width: 100%;
+    border-radius: 5px 5px 0 0;
     height: auto;
 }
 

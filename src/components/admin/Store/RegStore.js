@@ -6,7 +6,7 @@ import { getFilteredRestaurants, deleteRestaurant } from '../../../actions/resta
 const RegStore = ({currentId, setCurrentId}) => {
     const dispatch = useDispatch();
     const filteredRestaurants = useSelector((state) => state.restaurant)
-
+    console.log(filteredRestaurants)
     const [ keyword, setKeyword ] = useState({
         searchKey: '',
         searchValue: ''
@@ -59,23 +59,28 @@ const RegStore = ({currentId, setCurrentId}) => {
                 <p style={{fontSize:'1rem', fontWeight:'bold', color:'red', margin:'0.5rem'}}>
                     검색결과 - {filteredRestaurants.length > -1 ? filteredRestaurants.length : 0}건</p>
 
-                    <table className="searchresult" style={{width: '100%', fontSize:'0.7rem', letterSpacing:'0'}}>
+                    <table className="searchresult" style={{width: '100%', fontSize:'8px', letterSpacing:'0'}}>
                         <thead>
                             <tr>
-                                <th>고유코드</th><th>매장명</th><th>thumb</th><th>flyer</th><th>연동</th><th>종류</th><th>매장주소</th><th>삭제</th>
+                                <th>고유코드</th><th>매장명</th><th>thumb</th><th>flyer</th><th>연동</th><th>종류</th><th>주문전화</th><th>도로명주소</th><th>지번주소</th><th>tags</th><th>배달</th><th>영업시간</th><th>삭제</th>
                             </tr>
                         </thead>
                         <tbody>
                             {filteredRestaurants.length > -1 ? filteredRestaurants.map(result => (
                                 <tr key={result._id}>
-                                    <td onClick={() => setCurrentId(result._id)} style={{fontWeight:'bold'}}><Link className="searchResult" to={`/register/store/post/${result.restaurantCode}`}>
+                                    <td onClick={() => setCurrentId(result._id)} style={{fontWeight:'bold', fontSize:'7px'}}><Link className="searchResult" to={`/register/store/post/${result.restaurantCode}`}>
                                     {result.restaurantCode}</Link></td>
                                     <td style={{textAlign:'left'}}>{result.restaurantName}</td>
                                     {result.restaurantThumbnail.length > 100 ? <td>있음</td> : <td style={{fontWeight:'bold', background:'red', color:'white'}}>없음</td>}
                                     {result.restaurantFlyer.length > 100 ? <td>있음</td> : <td style={{fontWeight:'bold', background:'red', color:'white'}}>없음</td>}
                                     {result.restaurantOwner ? <td>O</td> : <td>X</td>}
                                     <td style={{fontWeight:'bold'}}>{result.restaurantCategory}</td>
+                                    <td style={{fontWeight:'bold'}}>{result.orderCall}</td>
                                     <td style={{textAlign:'left'}}>{result.restaurantAddress}</td>
+                                    <td style={{textAlign:'left'}}>{result.restaurantOldAddress}</td>
+                                    <td style={{textAlign:'left'}}>{result.tags}</td>
+                                    <td style={{textAlign:'left'}}>{(result.isDeliverable) ? "O" : "X"}</td>
+                                    <td style={{textAlign:'left'}}>{result.openingAt}~{result.closingAt}</td>
                                     {/* <td>{(result.restaurantReview) > -1 ? (result.restaurantReview).length : ""}개</td> */}
                                     <td><button onClick={() => dispatch(deleteRestaurant(result._id))}>X</button></td>
                                 </tr>

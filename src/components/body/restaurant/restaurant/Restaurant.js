@@ -33,7 +33,6 @@ const Restaurant = ({ restaurant }) => {
       currentTimeAdjust = currentTime
     }
   
-
     const closed = currentTimeAdjust > closingAdjust
 
     return (
