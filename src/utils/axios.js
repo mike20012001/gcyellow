@@ -4,6 +4,7 @@ const instance = axios.create(
     // { baseURL:"http://localhost:5000" }
     // { baseURL:"http://ec2-15-165-158-160.ap-northeast-2.compute.amazonaws.com:3000" }
     { baseURL:"https://mirzas.tk" }
+    // { baseURL:"https://yubi.cf" }
 
 )
 

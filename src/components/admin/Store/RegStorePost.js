@@ -6,7 +6,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { registerRestaurant, updateRestaurant } from '../../../actions/restaurantActions'
 import notAvailable from './styles/not-available.png'
 
-
 export function randAlphabet(length) {
         var randomChars = 'ACDFHIJKLMPQRSUVWXYZ';
         var result = '';
@@ -24,7 +23,8 @@ function RegStorePost({ currentId, setCurrentId }) {
     const [ deliverableDisplaying, setDeliverableDisplaying ] = useState(false)
     const [ isStoreClosed, setIsStoreClosed] = useState(false)
     const [ contract, setContract ] = useState(false)
-    
+    const [ fileUpload, setFileUpload ] = useState()
+
     const getRandom = useMemo(() => {
         const a = Math.floor(Math.random() * 1000001)
         const b = randAlphabet(2)
@@ -38,13 +38,14 @@ function RegStorePost({ currentId, setCurrentId }) {
         if(restaurantInfo) setStoreInfo(restaurantInfo)
     }, [restaurantInfo])
     
-    const [ storeInfo, setStoreInfo ] = useState({ restaurantCategory:'', restaurantCode: getRandom, restaurantName:'', restaurantBranch: '', restaurantAddress:'', restaurantOldAddress:'', openingAt:'', closingAt:'', dayOff:'', orderCall:'', restaurantThumbnail: notAvailable, restaurantFlyer: notAvailable, restaurantFlyer2: notAvailable, acceptGiftCard: giftCardAccepted, giftCard: "", isDeliverable: deliverableDisplaying,  deliveryCoverage: '', deliveryBasicCharge: '', deliveryChargeByArea: '', minimumOrder: '', hasContract: contract, contractToken: '', contractExp: '', orderIndex: '',  bizRegNo: '',  tags: '', isClosed: false, description: '', isDeleted: false
+    const [ storeInfo, setStoreInfo ] = useState({ restaurantCategory:'', restaurantCode: getRandom, restaurantName:'', restaurantBranch: '', restaurantAddress:'', restaurantOldAddress:'', openingAt:'', closingAt:'', dayOff:'', orderCall:'', restaurantThumbnail: notAvailable, restaurantFlyer: notAvailable, restaurantFlyers: null, restaurantFlyer2: notAvailable, acceptGiftCard: giftCardAccepted, giftCard: "", isDeliverable: deliverableDisplaying,  deliveryCoverage: '', deliveryBasicCharge: '', deliveryChargeByArea: '', minimumOrder: '', hasContract: contract, contractToken: '', contractExp: '', orderIndex: '',  bizRegNo: '',  tags: '', isClosed: false, description: '', isDeleted: false
     })
     
     
-    const { restaurantCode, restaurantCategory, restaurantName, restaurantBranch, restaurantAddress, restaurantOldAddress, openingAt, closingAt, dayOff, orderCall, restaurantThumbnail, restaurantFlyer, restaurantFlyer2, isDeliverable, deliveryCoverage, deliveryBasicCharge, deliveryChargeByArea, minimumOrder, hasContract, contractExp, orderIndex, bizRegNo, tags, description
+    const { restaurantCode, restaurantFlyers, restaurantCategory, restaurantName, restaurantBranch, restaurantAddress, restaurantOldAddress, openingAt, closingAt, dayOff, orderCall, restaurantThumbnail, restaurantFlyer, restaurantFlyer2, isDeliverable, deliveryCoverage, deliveryBasicCharge, deliveryChargeByArea, minimumOrder, hasContract, contractExp, orderIndex, bizRegNo, tags, description
     } = storeInfo
     
+    console.log(storeInfo)
     const onChange = (e) => {
         setStoreInfo({
             ...storeInfo, [e.target.name]: e.target.value
@@ -61,7 +62,7 @@ function RegStorePost({ currentId, setCurrentId }) {
 const giftCardChangeEvent = () => {
     setGiftCardAccepted(!giftCardAccepted)
     setStoreInfo({...storeInfo, acceptGiftCard:!giftCardAccepted})
-}
+    }
 
 const [ giftCardChecked, setGiftCardChecked ] = useState([])
 
@@ -70,51 +71,60 @@ const handleGiftCardToggle = ( value ) => {
     newChecked.push(value)
     setGiftCardChecked(newChecked)
     setStoreInfo({...storeInfo, giftCard:newChecked})
-}
+    }
 
 // 배달 가능여부
 const deliverChangeEvent = () => {
     setDeliverableDisplaying(!deliverableDisplaying)
     setStoreInfo({...storeInfo, isDeliverable:!deliverableDisplaying})
-}
+    }
 
 // 계약여부
 const contractChangeEvent = () => {
     setContract(!contract)
     setStoreInfo({...storeInfo, hasContract:!contract})
-}
+    }
 
 
 // 폐업 여부
 const isClosedChangeEvent = () => {
     setIsStoreClosed(!isStoreClosed)
     setStoreInfo({...storeInfo, isClosed:!isStoreClosed})
+    }
+
+const onSubmit = async (e) => {
+    e.preventDefault();
+    const body = JSON.stringify(storeInfo)
+    // console.log(body)
+    // console.log(storeInfo)
+    let formData = new FormData();
+    formData.append('registerData', body)
+    formData.append('file', fileUpload)
+
+    // console.log('onSubmit data ====>',storeInfo)
+    if(restaurantInfo) {
+        dispatch(updateRestaurant(currentId, formData))
+        .then( res => 
+            console.log(res)
+            // window.location.reload()
+            )
+        .catch (err => 
+            alert('나중에 다시 시도해주세요')
+            )
+    } else {
+        dispatch(registerRestaurant(formData))
+        .then( res => 
+            console.log('uploaded')
+            // window.location.reload()
+            )
+        .catch (err => 
+            alert('나중에 다시 시도해주세요')
+            )
+    }
+    // clear()
+    // window.location.reload()
 }
 
-
-    const onSubmit = async (e) => {
-        e.preventDefault();
-        console.log('onSubmit data ====>',storeInfo)
-        if(restaurantInfo) {
-            dispatch(updateRestaurant(currentId, storeInfo))
-            .then( res => 
-                window.location.reload()
-                )
-            .catch (err => 
-                alert('나중에 다시 시도해주세요')
-                )
-        } else {
-            dispatch(registerRestaurant(storeInfo))
-            .then( res => 
-                window.location.reload()
-                )
-            .catch (err => 
-                alert('나중에 다시 시도해주세요')
-                )
-        }
-        // clear()
-        // window.location.reload()
-    }
     return (
         <div className="register_form_wrap">
             <form onSubmit={onSubmit} style={{display:'flex', flexDirection:'column', justifyContent:'center', letterSpacing:'2px', textAlign:'center', fontSize:'0.9rem', lineHeight:'2.5rem' }}>
@@ -184,6 +194,20 @@ const isClosedChangeEvent = () => {
 
                 <div className="register_form_input">
                     <div className="post_title">전단지{restaurantInfo.restaurantFlyer ? "OK" : "NO"}</div>
+                    <input
+                        style={{color:'red'}}
+                        type="file"
+                        name="file"
+                        onChange={e => {
+                            const flyerUpload = e.target.files[0];
+                            setFileUpload(flyerUpload) }
+                        }
+                    />
+                </div>
+
+
+                {/* <div className="register_form_input">
+                    <div className="post_title">전단지{restaurantInfo.restaurantFlyer ? "OK" : "NO"}</div>
                     <FileBase
                         style={{color:'red'}}
                         type="file"
@@ -192,7 +216,7 @@ const isClosedChangeEvent = () => {
                         value={restaurantFlyer}
                         onDone={({base64}) => setStoreInfo({...storeInfo, restaurantFlyer: base64})}
                     />
-                </div>
+                </div> 
 
                 <div className="register_form_input">
                     <div className="post_title">전단지2{restaurantInfo.restaurantFlyer2 ? "OK" : "NO"}</div>
@@ -204,7 +228,7 @@ const isClosedChangeEvent = () => {
                         value={restaurantFlyer2}
                         onDone={({base64}) => setStoreInfo({...storeInfo, restaurantFlyer2: base64})}
                     />
-                </div>
+                </div> */}
 
                 {/* <div className="register_form_input">
                     <div>대표자</div>

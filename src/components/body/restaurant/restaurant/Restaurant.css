@@ -2,7 +2,6 @@
 .restaurants {
     display: grid;
     grid-template-columns: repeat(auto-fill, minMax(320px, 1fr));
-
 }
 
 .restaurant {
@@ -24,12 +23,16 @@
 }
 
 .restaurant.inactive {
-    display:none;
+    background: rgba(189, 189, 189, 0.9);
+    color: #333333;
+    padding: 15px;
+    height: auto;
 }
 
 .restaurant:hover {
     transition: ease-out 0.2s;
     box-shadow: 1px 1px 2px 0px #333333;
+    border: none;
 }
 
 .restaurantVIP {
@@ -72,12 +75,12 @@
     width: 38%;
     border-radius: 5px;
     margin: 5px auto;
+    margin-right: 10px;
 }
 
 .thumb img{
-    width: 100%;
-    min-height: 120px;
-    max-height: 140px;
+    width: 120px;
+    height: 120px;
     object-fit: contain;
 }
 
@@ -90,6 +93,7 @@
     padding: 5px;
     font-size: 1rem;
     font-weight: bolder;
+    margin: 5px 10px;
 }
 
 .card_text_header_VIP {
@@ -137,11 +141,17 @@ p{
 }
 
 .menuheaderContents {
-    color: #0a0a0a;
+    color: #505050;
     font-size: 0.75rem;
     text-align: left;
-    margin: 11px 0px 0px 15px;
-    padding-left: 10px;
+}
+
+.menuheaderContents td {
+    padding: 5px 20px;
+}
+
+.headerTitle {
+    width: 100px;
 }
 
 

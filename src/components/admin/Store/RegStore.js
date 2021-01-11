@@ -6,7 +6,7 @@ import { getFilteredRestaurants, deleteRestaurant } from '../../../actions/resta
 const RegStore = ({currentId, setCurrentId}) => {
     const dispatch = useDispatch();
     const filteredRestaurants = useSelector((state) => state.restaurant)
-    console.log(filteredRestaurants)
+    // console.log(filteredRestaurants)
     const [ keyword, setKeyword ] = useState({
         searchKey: '',
         searchValue: ''

@@ -44,6 +44,7 @@ const App = () => {
                     {/* <Route path='/' component={MainSearchBar} /> */}
                     <Route path='/' component={SearchbarArea} />
                 </Switch>
+                <hr  />
                 <Switch>
                     <Route exact path='/' component={Categories} />
                     <Route exact path="/restaurant/:id" component={Restaurants} />

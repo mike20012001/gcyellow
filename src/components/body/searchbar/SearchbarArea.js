@@ -1,10 +1,10 @@
 import React from 'react'
-import Pizza from '../../../img/mainImg/main.jpg'
+import mainImg from '../../../img/mainImg/main.jpg'
 
 const SearchbarArea = () => {
     return (
-        <div style={{height:'100%', padding:'2px 0'}}>
-            <img src={Pizza} alt="" height="100%" />
+        <div style={{height:'150px', margin:'0 5px 15px 5px', padding:'2px 0'}}>
+            <img src={mainImg} alt="" style={{height:'150px', width:'100%', objectFit:'cover'}}/>
         </div>
     )
 }

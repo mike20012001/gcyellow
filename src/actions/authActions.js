@@ -89,7 +89,8 @@ export const tokenConfig = getState => {
 
         const config = {
             headers: {
-                "Content-type": "application/json"
+                // "Content-Type": "application/json"
+                // "Content-Type": "multipart/form-data"
             }
         }
     

@@ -52,7 +52,7 @@ const SearchResult = (props) => {
                                 <p className="tag is-white">문의</p> }</div>
 
                             {(restaurant.restaurantAddress) ? 
-                                <p className="tag is-primary">{restaurant.restaurantAddress}</p> : 
+                                <p className="tag is-primary" style={{marginLeft:'10px'}}>{restaurant.restaurantOldAddress}</p> : 
                                 "" }
 
                         </div>

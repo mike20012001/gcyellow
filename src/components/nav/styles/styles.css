@@ -7,13 +7,14 @@
     color: #333333;
     background: transparent;
     font-weight: bolder;
-    height: 52px;
+    height: 70px;
     z-index: 10;
 }
 
 .navigationbar_top.active {
     background: #f7f7f7;
     transition: all 0.5s;
+    border-bottom: 1px solid #969696;
     box-shadow:  1px 1px 1px #c7c7c7, 
                  -5px -1px 10px #ffffff;
 
@@ -32,21 +33,21 @@
 }
 
 .navigationbar a:hover {
-    color: #333333;
+    color: white;
     transition: ease-in-out 0.1s;
 }
 
-.navigationbar a:hover:before {
+ 
+/* .navigationbar a:hover:before {
     position: absolute;
-    top: 40px;
-    width: 7px;
+    top: 50px;
+    width: 100px;
     height: 7px;
-    border-radius: 50%;
+    border-radius: 5px;
     background: #333333;
     box-shadow: 1px 1px 3px 1px #ffffff;
     content: "";
-
-}
+}  */
 
 .logoText:hover {
     color: #333333 !important;

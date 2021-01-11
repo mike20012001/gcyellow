@@ -37,9 +37,9 @@ const Restaurant = ({ restaurant }) => {
 
     return (
         //  <div className={closed ? "restaurant inactive" : "restaurant active"}>
-        <div className={"restaurant"}> 
+        <div className={closed ? "restaurant inactive" : "restaurant active"}> 
         <Link to={`/restaurant/${restaurant.restaurantCategory}/${restaurant.restaurantCode}`}>
-        <div className={closed ? "restaurant_card inactive" : "restaurant_card active"}>
+        <div className="restaurant_card">
             <div className="card_text_header">{restaurant.restaurantName} {restaurant.restaurantBranch ? "- " + restaurant.restaurantBranch : ""}</div> 
             <div className="card_body">
             <div className="card_text_wrap" key={restaurant._id}>
@@ -66,7 +66,7 @@ const Restaurant = ({ restaurant }) => {
                     <p className="tag is-white">문의</p> }</div> */}
 
                 {(restaurant.restaurantAddress) ? 
-                    <p className="tag is-primary">{restaurant.restaurantAddress}</p> : 
+                    <p className="tag is-primary" style={{marginLeft:'10px'}}>{restaurant.restaurantOldAddress}</p> : 
                     "" }
 
             </div>
@@ -81,47 +81,3 @@ const Restaurant = ({ restaurant }) => {
 }
 
 export default Restaurant
-
-
-
-//         //  <div className={closed ? "restaurant inactive" : "restaurant active"}>
-//         <div className={"restaurant"}> 
-//         <Link to={`/restaurant/${restaurant.restaurantCategory}/${restaurant.restaurantCode}`}>
-//         <div className={closed ? "restaurant_card inactive" : "restaurant_card active"}>
-//             <div className="card_text_header">{restaurant.restaurantName} {restaurant.restaurantBranch ? "- " + restaurant.restaurantBranch : ""}</div> 
-//             <div className="card_body">
-//             <div className="card_text_wrap" key={restaurant._id}>
-//                 <div><p className="tag is-white">영업시간</p>{currentTimeAdjust > closingAdjust ? <p className='tag is-danger'>영업종료</p> :<p className="tag is-white"> {restaurant.openingAt} ~ {restaurant.closingAt}</p>}<br/> </div>
-
-//                 <div><p className="tag is-white">휴 무 일</p>{restaurant.dayOff ? 
-//                     <p className="tag is-white">{restaurant.dayOff}</p> : 
-//                     <p className="tag is-white">확인필요</p>}</div>
-
-//                 <div><p className="tag is-white">상품권사용</p>{restaurant.giftCard[0] !== "" ? 
-//                     <p className="tag is-white" >가능</p>:
-//                     <p className="tag is-white" >문의</p>}</div>
-
-//                 <div><p className="tag is-white">최소주문</p>{(restaurant.minimumOrder).includes('문의') || (restaurant.minimumOrder) === "" ?
-//                     <p className="tag is-white"> 문의 </p> :
-//                     <p className="tag is-white"> {numberCommas(restaurant.minimumOrder)}원</p>}</div>
-
-//                 <div><p className="tag is-white">배달지역</p>{restaurant.deliveryCoverage[0] !== "" ?
-//                     <p className="tag is-white">{numberCommas(restaurant.deliveryCoverage.map((c) => ` ${c}`))}</p> :
-//                     <p className="tag is-white">문의</p>}</div>
-// {/* 
-//                 <div><p className="tag is-white">기본배달료</p>{(restaurant.deliveryBasicCharge).includes('000') ? 
-//                     <p className="tag is-white">{numberCommas(restaurant.deliveryBasicCharge)}원</p> : 
-//                     <p className="tag is-white">문의</p> }</div> */}
-
-//                 {(restaurant.restaurantAddress) ? 
-//                     <p className="tag is-primary">{restaurant.restaurantAddress}</p> : 
-//                     "" }
-
-//             </div>
-//             <div className="thumb">
-//                 <img src={restaurant.restaurantThumbnail} alt='thumbnail' height="125px"></img>
-//             </div>
-//             </div>
-//         </div>
-//         </Link>
-//     </div>

@@ -67,7 +67,7 @@ const Navigation = () => {
                     <div className="modal-content is-clipped" style={{display:'flex', justifyContent: 'center', width:'99%', height:'80%'}}>
                         <div>
                             <div style={{fontSize:'1rem', padding:'0 1rem 2rem 1rem'}}>
-                                음식점, 음식이름, 위치 등을 입력해보세요
+                                음식점, 음식이름, 동네이름 등을 입력해보세요
                             </div>
                             
                             <div className="field">
@@ -84,9 +84,9 @@ const Navigation = () => {
                                 <div onClick={clear} style={{fontSize:'1.6rem', color:'red'}}><i className="fas fa-times-circle"></i></div>
                                 </form>
                                 <div style={{display:'flex', flexDirection:'column', padding: '10px', margin:'1rem', width:'30%'}}>
+                                    <span className="tag is-danger">족발</span><br/>
                                     <span className="tag is-danger">신음동</span><br/>
-                                    <span className="tag is-danger">치킨</span><br/>
-                                    <span className="tag is-danger">떡볶이</span><br/>
+                                    <span className="tag is-danger">짜장면</span><br/>
                                 </div>
                             </div>
                         </div>
