@@ -38,11 +38,11 @@ function RegStorePost({ currentId, setCurrentId }) {
         if(restaurantInfo) setStoreInfo(restaurantInfo)
     }, [restaurantInfo])
     
-    const [ storeInfo, setStoreInfo ] = useState({ restaurantCategory:'', restaurantCode: getRandom, restaurantName:'', restaurantBranch: '', restaurantAddress:'', restaurantOldAddress:'', openingAt:'', closingAt:'', dayOff:'', orderCall:'', restaurantThumbnail: notAvailable, restaurantFlyer: notAvailable, restaurantFlyers: null, restaurantFlyer2: notAvailable, acceptGiftCard: giftCardAccepted, giftCard: "", isDeliverable: deliverableDisplaying,  deliveryCoverage: '', deliveryBasicCharge: '', deliveryChargeByArea: '', minimumOrder: '', hasContract: contract, contractToken: '', contractExp: '', orderIndex: '',  bizRegNo: '',  tags: '', isClosed: false, description: '', isDeleted: false
+    const [ storeInfo, setStoreInfo ] = useState({ restaurantCategory:'', restaurantCode: getRandom, restaurantName:'', restaurantBranch: '', restaurantAddress:'', restaurantOldAddress:'', openingAt:'', closingAt:'', dayOff:'', orderCall:'', restaurantThumbnail: notAvailable, restaurantFlyer: notAvailable, restaurantFlyer2: notAvailable, acceptGiftCard: giftCardAccepted, giftCard: "", isDeliverable: deliverableDisplaying,  deliveryCoverage: '', deliveryBasicCharge: '', deliveryChargeByArea: '', minimumOrder: '', hasContract: contract, contractToken: '', contractExp: '', orderIndex: '',  bizRegNo: '',  tags: '', isClosed: false, description: '', isDeleted: false
     })
     
     
-    const { restaurantCode, restaurantFlyers, restaurantCategory, restaurantName, restaurantBranch, restaurantAddress, restaurantOldAddress, openingAt, closingAt, dayOff, orderCall, restaurantThumbnail, restaurantFlyer, restaurantFlyer2, isDeliverable, deliveryCoverage, deliveryBasicCharge, deliveryChargeByArea, minimumOrder, hasContract, contractExp, orderIndex, bizRegNo, tags, description
+    const { restaurantCode, restaurantCategory, restaurantName, restaurantBranch, restaurantAddress, restaurantOldAddress, openingAt, closingAt, dayOff, orderCall, restaurantThumbnail, isDeliverable, deliveryCoverage, deliveryBasicCharge, deliveryChargeByArea, minimumOrder, hasContract, contractExp, orderIndex, bizRegNo, tags, description
     } = storeInfo
     
     console.log(storeInfo)
