@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { getRestaurant } from '../../../actions/restaurantActions'
+import { getRestaurantByCode } from '../../../actions/restaurantActions'
 import Restaurant from './restaurant/Restaurant'
 import RestaurantVIP from './restaurant/RestaurantVIP'
 import Submenu from './restaurant/Submenu'
@@ -13,10 +13,16 @@ const Restaurants = () => {
     const restaurantVIP = restaurant.filter((c) =>  c.hasContract === true) 
 
     useEffect(() => {
-        dispatch(getRestaurant(params.id))
+        // dispatch(getRestaurant(params.id))
+        dispatch(getRestaurantByCode(params.id))
+        return () => {}
         },
         [params.id, dispatch])
     
+        useEffect(() => {
+            return () => {}
+        }, [])
+
     return (
         <div>
             <Submenu />
@@ -37,4 +43,4 @@ const Restaurants = () => {
     )
 }
 
-export default Restaurants
+export default React.memo(Restaurants)

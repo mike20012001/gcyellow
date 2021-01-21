@@ -45,7 +45,7 @@ function RegStorePost({ currentId, setCurrentId }) {
     const { restaurantCode, restaurantCategory, restaurantName, restaurantBranch, restaurantAddress, restaurantOldAddress, openingAt, closingAt, dayOff, orderCall, restaurantThumbnail, isDeliverable, deliveryCoverage, deliveryBasicCharge, deliveryChargeByArea, minimumOrder, hasContract, contractExp, orderIndex, bizRegNo, tags, description
     } = storeInfo
     
-    console.log(storeInfo)
+    // console.log(storeInfo)
     const onChange = (e) => {
         setStoreInfo({
             ...storeInfo, [e.target.name]: e.target.value
@@ -95,17 +95,14 @@ const isClosedChangeEvent = () => {
 const onSubmit = async (e) => {
     e.preventDefault();
     const body = JSON.stringify(storeInfo)
-    // console.log(body)
-    // console.log(storeInfo)
     let formData = new FormData();
     formData.append('registerData', body)
     formData.append('file', fileUpload)
 
-    // console.log('onSubmit data ====>',storeInfo)
     if(restaurantInfo) {
         dispatch(updateRestaurant(currentId, formData))
         .then( res => 
-            console.log(res)
+            console.log('update Restaurant ======> ', res)
             // window.location.reload()
             )
         .catch (err => 
@@ -204,31 +201,6 @@ const onSubmit = async (e) => {
                         }
                     />
                 </div>
-
-
-                {/* <div className="register_form_input">
-                    <div className="post_title">전단지{restaurantInfo.restaurantFlyer ? "OK" : "NO"}</div>
-                    <FileBase
-                        style={{color:'red'}}
-                        type="file"
-                        multiple={false}
-                        name="restaurantFlyer"
-                        value={restaurantFlyer}
-                        onDone={({base64}) => setStoreInfo({...storeInfo, restaurantFlyer: base64})}
-                    />
-                </div> 
-
-                <div className="register_form_input">
-                    <div className="post_title">전단지2{restaurantInfo.restaurantFlyer2 ? "OK" : "NO"}</div>
-                    <FileBase
-                        style={{color:'red'}}
-                        type="file"
-                        multiple={false}
-                        name="restaurantFlyer2"
-                        value={restaurantFlyer2}
-                        onDone={({base64}) => setStoreInfo({...storeInfo, restaurantFlyer2: base64})}
-                    />
-                </div> */}
 
                 {/* <div className="register_form_input">
                     <div>대표자</div>

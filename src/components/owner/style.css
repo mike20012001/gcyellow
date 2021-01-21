@@ -1,0 +1,35 @@
+.ownermain {
+    position: absolute;
+    top:0;
+    width: 100%;
+    background: inherit;
+    z-index: 99999;
+}
+
+.ownermenu {
+    display: flex;
+    flex-direction: column;
+    font-size: 13px;
+    font-weight: bolder;
+
+}
+
+.ownermenuLink {
+    display: flex;
+    flex-direction: column;
+    font-size: 12px;
+    font-weight: normal;
+    margin-left:15px;
+    padding: 5px;
+}
+
+.ownermenuLink:hover {
+    background: #008cff;
+    color: white;
+}
+ 
+.ownermain_btn {
+    font-size: 12px;
+    outline: none !important;
+    border: none;
+} 

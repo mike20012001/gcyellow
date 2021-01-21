@@ -21,7 +21,7 @@ const MenuContents = ({ foodList }) => {
             </div>
     )
 }
-export default MenuContents
+export default React.memo(MenuContents)
 
         // <div style={{border: '1px solid green', maxWidth:'700px', minWidth:'320px', margin: '0 auto'}}>
         //     <div style={{border: '1px solid black', width:'100%', minWidth:'320px'}}>

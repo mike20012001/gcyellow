@@ -72,7 +72,7 @@ const RegStore = ({currentId, setCurrentId}) => {
                                     {result.restaurantCode}</Link></td>
                                     <td style={{textAlign:'left'}}>{result.restaurantName}</td>
                                     {result.restaurantThumbnail.length > 100 ? <td>있음</td> : <td style={{fontWeight:'bold', background:'red', color:'white'}}>없음</td>}
-                                    {result.restaurantFlyer.length > 100 ? <td>있음</td> : <td style={{fontWeight:'bold', background:'red', color:'white'}}>없음</td>}
+                                    {result.restaurantFlyer ? <td>있음</td> : <td style={{fontWeight:'bold', background:'red', color:'white'}}>없음</td>}
                                     {result.restaurantOwner ? <td>O</td> : <td>X</td>}
                                     <td style={{fontWeight:'bold'}}>{result.restaurantCategory}</td>
                                     <td style={{fontWeight:'bold'}}>{result.orderCall}</td>

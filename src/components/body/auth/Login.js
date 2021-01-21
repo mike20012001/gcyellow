@@ -15,19 +15,18 @@ const Login = ({ isAuthenticated, error, login, clearErrors }) => {
     clearErrors();
     setModal(!modal);
   }, [clearErrors, modal]);
-
   const handleChangeEmail = (e) => setEmail(e.target.value);
   const handleChangePassword = (e) => setPassword(e.target.value);
-
+  
   const handleOnSubmit = (e) => {
     e.preventDefault();
-
+    
     const user = { email, password };
-
+    
     // Attempt to login
     login(user);
   };
-
+  
   useEffect(() => {
     // Check for register error
     if (error.id === 'LOGIN_FAIL') {
@@ -35,7 +34,7 @@ const Login = ({ isAuthenticated, error, login, clearErrors }) => {
     } else {
       setMsg(null);
     }
-
+    
     // If authenticated, close modal
     if (modal) {
       if (isAuthenticated) {
@@ -43,6 +42,8 @@ const Login = ({ isAuthenticated, error, login, clearErrors }) => {
       }
     }
   }, [error, handleToggle, isAuthenticated, modal]);
+  
+  
 
   return (
     <div>

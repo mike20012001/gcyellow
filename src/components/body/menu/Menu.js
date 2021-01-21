@@ -74,7 +74,12 @@ const Menu = (props) => {
 
     useEffect(() => {
         dispatch(getFoodList(params)) 
+        return () => {}
     }, [params, dispatch])
+
+    useEffect(() => {
+      return () => {}
+    }, [])
 
     return (
         <div className={classes.root}>
@@ -104,7 +109,7 @@ const Menu = (props) => {
     )
 }
 
-export default Menu
+export default React.memo(Menu)
 
 export function BlogData ({filtered}) {
   const [ data, setData ] = useState({});
@@ -117,6 +122,7 @@ export function BlogData ({filtered}) {
   let aa 
   if(filtered[0].restaurantBranch !== undefined ) {
     aa =  filtered[0].restaurantName + " " + filtered[0].restaurantBranch
+    console.log(aa)
   } else {
     aa = filtered[0].restaurantName
   }
@@ -130,11 +136,18 @@ export function BlogData ({filtered}) {
       const fetchedData = blog.data.items
       const processedFetchedData = fetchedData.filter((c) => c.title.includes("김천"))
       setData(processedFetchedData)
+      return () => {}
     } 
     getBlog()
     }, [bb] )
 
+    useEffect(() => {
+      return () => {}
+    }, [])
+
   return (
+    <div>
+    {filtered.length > 0 ? 
     <div style={{textAlign:'left', fontSize:"0.8rem", marginTop:'0.8rem'}}>
       <div style={{maxWidth: '600px', margin: '0 auto', fontWeight:"normal", border: '1px solid gray', padding: '15px', borderRadius:'3px'}}>
         <p style={{fontWeight:'bold', fontSize:'1rem', color:'green'}}>네이버 블로그 리뷰</p>
@@ -147,6 +160,8 @@ export function BlogData ({filtered}) {
           <font style={{border:'1px solid gray', padding:'5px 10px', fontSize:'0.6rem'}}>powered by <b style={{color:'green'}}>NAVER</b> openAPI</font>
         </div>
       </div>
+    </div>
+    : ""}
     </div>
   )
 }

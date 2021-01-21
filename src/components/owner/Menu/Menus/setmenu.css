@@ -1,0 +1,136 @@
+.owner_menu input, .owner_menu textarea {
+    border-radius: 5px;
+    outline: 0;
+    border: 0;
+}
+
+input {
+    color: #494949;
+}
+textarea {
+    color: #494949;
+    resize: none;
+}
+
+.group_title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #fefefe;
+    padding: 0 17px;
+    border-radius: 5px;
+    background: #92bde7;
+    box-shadow:  5px 5px 10px #7b9fc2, 
+                 -1px -1px #fefefe;
+}
+
+.group_title label {
+    font-size: 11px;
+    margin: 0;
+}
+
+.group_title input {
+    width: 70%;
+}
+
+.priceDifferBySize_container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minMax(120px, auto));
+    --gap: 5;
+    grid-gap: calc(var(--gap) * 1px);
+    margin-top: 7px;
+    text-align: right;
+    line-height: 20px;
+}
+
+.priceDifferBySize_wrap {
+    border: 1px solid #fefefe;
+    padding: 7px;
+    font-weight: bold;
+    border-radius: 5px;
+    background: #92bde7;
+    box-shadow:  5px 5px 10px #7b9fc2, 
+                 -1px -1px 10px #fefefe;
+}
+
+.price_title {
+    width: 50px;
+    margin: 3px 0;
+}
+
+.menu_title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    min-width: 200px;
+    border: 1px solid #f3f6fa;
+    border-radius: 5px;
+    padding: 5px;
+    font-weight: bold;
+}
+
+.menu_title_wrap {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #fefefe;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 7px;
+}
+
+.menu_title input, .menu_title textarea {
+    width: 70%;
+    padding: 5px 10px;
+}
+
+.priceDifferBySize_wrap .price_title {
+    color: #494949;
+    width: 95px;
+}
+
+.priceDifferBySize_wrap .price_title::after {
+    content: "원";
+    position: absolute;
+    margin: 3px 0 0 3px;
+}
+
+.priceDifferBySize_wrap .price_title input{
+    text-align: right;
+    width: 90px;
+    color: #494949;
+}
+
+
+
+
+.priceDifferBySize_wrap .option_title {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    color: #494949;
+    padding: 3px;
+}
+.priceDifferBySize_wrap .option_title::after {
+    margin: 3px 0 0 3px;
+}
+.priceDifferBySize_wrap .option_title input {
+    width: 70%;
+}
+
+
+
+.priceDifferBySize_wrap .comeswith_title {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    color: #494949;
+    padding: 3px;
+}
+.priceDifferBySize_wrap .comeswith_title::after {
+    margin: 3px 0 0 3px;
+}
+.priceDifferBySize_wrap .comeswith_title input {
+    width: 70%;
+}
+

@@ -6,6 +6,7 @@ export const getRestaurant = (id) => async (dispatch) => {
     try {
         const { data } = await api.fetchRestaurant(id);
         dispatch({ type: GET_RESTAURANT, payload: data })
+        // dispatch({ type: GET_RESTAURANT, payload: data })
     } catch (error) {
         console.log(error)
     }
@@ -58,7 +59,7 @@ export const getAllRestaurants = () => async (dispatch) => {
 export const registerRestaurant = (registerData) => async (dispatch, getState) => {
     try {
         const { data } = await api.registerRestaurant(registerData, tokenConfig(getState));
-        console.log('registerRestaurant', data)
+        // console.log('registerRestaurant', data)
         dispatch({ type: REGISTER_RESTAURANT, payload: data})
     } catch (error) {
         console.log(error)
@@ -68,7 +69,17 @@ export const registerRestaurant = (registerData) => async (dispatch, getState) =
 export const updateRestaurant = (id, updatedData) => async (dispatch, getState) => {
     try {
         const { data } = await api.updateRestaurant(id, updatedData, tokenConfig(getState));
-        console.log('restaurantAction', data)
+        // console.log('restaurantAction', data)
+        dispatch({ type: UPDATE_RESTAURANT, payload: data})
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const updateCloseStatus = (id, updatedData) => async (dispatch, getState) => {
+    try {
+        const { data } = await api.updateCloseStatus(id, updatedData, tokenConfig(getState));
+        // console.log('restaurantAction', data)
         dispatch({ type: UPDATE_RESTAURANT, payload: data})
     } catch (error) {
         console.log(error)

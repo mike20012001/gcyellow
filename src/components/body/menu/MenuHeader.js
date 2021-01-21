@@ -71,4 +71,4 @@ const MenuHeader = ({ filtered }) => {
     )
 }
 
-export default MenuHeader
+export default React.memo(MenuHeader)

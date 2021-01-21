@@ -1,6 +1,7 @@
 import { GET_FOODLIST, GET_CURRENT_STORE_FOODLIST, ADD_FOOD, DELETE_FOODMENU, EDIT_FOOD } from '../actions/actionTypes'
 import * as api from '../api/menuApi'
 
+//각 레스토랑별 메뉴 
 export const getFoodList = (id) => async (dispatch) => {
     try {
         const { data } = await api.fetchFoodList(id);

@@ -80,4 +80,4 @@ const Restaurant = ({ restaurant }) => {
     )
 }
 
-export default Restaurant
+export default React.memo(Restaurant)

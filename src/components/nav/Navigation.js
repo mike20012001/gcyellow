@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import {getFilteredRestaurantsByTag} from '../../actions/restaurantActions'
 import { Link, useHistory } from 'react-router-dom'
@@ -10,8 +10,10 @@ const Navigation = () => {
     const searchInput = useRef();
     const auth = useSelector((state) => state.auth.user)
     const dispatch = useDispatch();
+
     const [ navbar, setNavbar ] = useState(false)
     const [ ModalOpen, setModalOpen] = useState(false)
+    const [ isDone, setIsDone ] = useState(false) 
     const [ keyword, setKeyword ] = useState('')
     
     const changeBackground = () => {
@@ -40,14 +42,31 @@ const Navigation = () => {
         e.preventDefault();
         if (keyword === "") {
             alert('검색어를 입력하세요!')
+            setIsDone(false)
             return;
         } else {
             dispatch(getFilteredRestaurantsByTag(keyword))
             setModalOpen(false)
+            setIsDone(true)
             history.push(`/searchresult/${keyword.keyword}`)
         }
+        // } else {  useEffect 사용 이전
+        //     dispatch(getFilteredRestaurantsByTag(keyword))
+        //     setModalOpen(false)
+        //     history.push(`/searchresult/${keyword.keyword}`)
+        // }
     } 
     
+    useEffect(() => {
+        if (isDone) {
+            history.push(`/searchresult/${keyword.keyword}`)
+        }
+    }, [isDone, history, keyword.keyword])
+
+
+    useEffect(() => {
+        return () => {}
+    }, [])
 
     return (
         <div className={navbar ? "navigationbar_top active" : "navigationbar_top"} style={{maxWidth: '1024px', width:'100%'}}>
@@ -57,7 +76,7 @@ const Navigation = () => {
                 </div>
                 <div className="navigationbar" style={{display:'flex', justifyContent:'space-around', width:'60%', alignItems:"center"}}>
                     <button className="button is-small is-danger is-outlined" onClick={() => setModalOpen(true)}>검색하기</button>
-                    {auth.role === 'admin' ? <Link to='/register/store'><i style={{fontSize:'1rem', color:'#333333'}}>등록</i></Link> : ""}
+                    {auth.role === 'user' ? "" : (auth.role === 'admin' ? <Link to='/register/store'><i style={{fontSize:'1rem', color:'#333333'}}>등록</i></Link> : (auth.role === "owner" ? <Link to='/owner/'><i style={{fontSize:'1rem', color:'#333333'}}>관리</i></Link> : "")) }
                 </div>
             </div>
 

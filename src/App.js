@@ -19,6 +19,9 @@ import Register from './components/admin/Register';
 // import Login from './components/body/auth/Login';
 import SearchbarArea from './components/body/searchbar/SearchbarArea';
 import SearchResult from './components/body/restaurant/SearchResult';
+import OwnerMain from './components/owner/OwnerMain';
+import Info from './components/owner/Info/Info';
+import MenuInfo from './components/owner/Menu/MenuInfo';
 // import AppNavbar from './components/body/nav/Navbar';
 
 
@@ -28,26 +31,36 @@ const App = () => {
     
     useEffect( () => {
         dispatch(loadUser());
+        return () => {
+        }
     })
 
     useEffect(() => {
         dispatch(getCategory())
+        return () => {
+        }
     }, [currentId, dispatch])
+
+    useEffect(() => {
+        return () => {
+        }
+    }, [])
 
         return ( 
             <div className="App">
             <Router>
-                {/* <AppNavbar /> */}
-                <Navigation />
+                    <Navigation />
                 <Switch>
                     <Route path='/register' component={Register} />
+                    <Route path='/owner' component={OwnerMain} />
                     {/* <Route path='/' component={MainSearchBar} /> */}
-                    <Route path='/' component={SearchbarArea} />
+                    <Route exact path='/' component={SearchbarArea} />
                 </Switch>
                 <hr  />
                 <Switch>
+                    <Route exact path='/owner/info/' render={(props) => <Info {...props} currentId={currentId} /> } />
+                    <Route exact path='/owner/menu/' render={(props) => <MenuInfo {...props} currentId={currentId} /> } />
                     <Route exact path='/' component={Categories} />
-                    <Route exact path="/restaurant/:id" component={Restaurants} />
                     <Route exact path="/restaurant/:id" component={Restaurants} />
                     <Route path ='/restaurant/:id/:code' component={Menu} />
                     <Route path ='/searchresult/:keyword' component={SearchResult} />
