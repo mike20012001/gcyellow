@@ -68,8 +68,10 @@ export const registerRestaurant = (registerData) => async (dispatch, getState) =
 
 export const updateRestaurant = (id, updatedData) => async (dispatch, getState) => {
     try {
+        console.log('updateRestaurant', id)
+        console.log('updateRestaurant', updatedData)
         const { data } = await api.updateRestaurant(id, updatedData, tokenConfig(getState));
-        // console.log('restaurantAction', data)
+        console.log('restaurantAction', data)
         dispatch({ type: UPDATE_RESTAURANT, payload: data})
     } catch (error) {
         console.log(error)

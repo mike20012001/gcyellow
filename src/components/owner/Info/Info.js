@@ -6,6 +6,9 @@ import { updateRestaurant } from '../../../actions/restaurantActions';
 const Info = () => {
     const restaurantInfo = useSelector((state) => state.restaurant[0])
     const dispatch = useDispatch();
+
+
+
     if(!restaurantInfo) {
         window.location.replace('/owner')
     }

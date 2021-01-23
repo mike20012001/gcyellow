@@ -15,6 +15,26 @@ const actionSanitizer = (action) => (
     { ...action, data: '<<LONG_BLOB>>' } : action
   );
 
+function saveToLocalStorage(state) {
+    try {
+        const serializedState = JSON.stringify(state)
+        localStorage.setItem('state', serializedState)
+    } catch(err) {
+        console.log(err)
+    }
+}
+
+function loadFromLocalStorage() {
+    try {
+        const serializedState = localStorage.getItem('state')
+        if(serializedState === null) return undefined
+        return JSON.parse(serializedState)
+    } catch(err) {
+        console.log(err)
+        return undefined
+    }
+}
+
 const composeEnhancers = 
     typeof window === 'object' &&
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?   
@@ -24,12 +44,19 @@ const composeEnhancers =
         serialize: true
         // Specify extension’s options like name, actionsBlacklist, actionsCreators, serialize...
     }) : compose;
+    
+const persistedState = loadFromLocalStorage()
 
 const enhancer = composeEnhancers(
     applyMiddleware(thunk))
 
-const store = createStore(reducers,
+
+const store = createStore(
+    reducers,
+    persistedState,
     enhancer)
+
+store.subscribe(() => saveToLocalStorage(store.getState()))
 
 ReactDOM.render(
     <Provider store={store}>

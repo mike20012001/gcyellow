@@ -10,10 +10,6 @@ const OwnerMain = () => {
     const auth = useSelector((state) => state.auth)
     const restaurantInfo = useSelector((state) => state.restaurant[0] ? state.restaurant[0] : "")
 
-    const [ clicked, setClicked ] = useState(false)
-    const [ storeStatus, setStoreStatus ] = useState(restaurantInfo.isClosed)
-    const [ storeInfo, setStoreInfo ] = useState({ isClosed: restaurantInfo.isClosed })
-    
     const currentStatus = {
         isClosed: restaurantInfo.isClosed
     }    
@@ -30,26 +26,28 @@ const OwnerMain = () => {
         return () => {}
     }, [])
 
-    const storeOpenHandler = () => {
-        console.log('storeInfo', storeInfo)
-        dispatch(updateCloseStatus(restaurantInfo._id, )).then(res => (
-            console.log('버튼 클릭됨')
-            )).catch (err => 
-                console.log(err))
-            }
+    // const storeOpenHandler = () => {
+    //     console.log('storeInfo', storeInfo)
+    //     dispatch(updateCloseStatus(restaurantInfo._id, )).then(res => (
+    //         console.log('버튼 클릭됨')
+    //         )).catch (err => 
+    //             console.log(err))
+    //         }
     return (
         <div style={{background:'#f5f5f5'}}>
             <nav className="ownermain">
-                <OwnerStatus auth={auth} restaurantInfo={restaurantInfo} dispatch={dispatch} setStoreInfo={setStoreInfo} setStoreStatus={setStoreStatus} storeInfo={storeInfo} storeStatus={storeStatus} storeOpenHandler={storeOpenHandler} isClosed={isClosed} currentStatus={currentStatus}/>
+                <OwnerStatus auth={auth} restaurantInfo={restaurantInfo} dispatch={dispatch} isClosed={isClosed} currentStatus={currentStatus}/>
+                {/* <OwnerStatus auth={auth} restaurantInfo={restaurantInfo} dispatch={dispatch} setStoreInfo={setStoreInfo} setStoreStatus={setStoreStatus} storeInfo={storeInfo} storeStatus={storeStatus} storeOpenHandler={storeOpenHandler} isClosed={isClosed} currentStatus={currentStatus}/> */}
             <hr />
-                <OwnerNavbar auth={auth} clicked={clicked} setClicked={setClicked}/>
+                <OwnerNavbar auth={auth} />
+                {/* <OwnerNavbar auth={auth} clicked={clicked} setClicked={setClicked}/> */}
             </nav>
         </div>
     )
 }
 
 
-function OwnerStatus ({auth, restaurantInfo, dispatch, storeOpenHandler, storeStatus, isClosed, setStoreInfo, currentStatus}) {
+function OwnerStatus ({auth, restaurantInfo, dispatch, isClosed, currentStatus}) {
 
 
     return (
@@ -86,7 +84,8 @@ function OwnerStatus ({auth, restaurantInfo, dispatch, storeOpenHandler, storeSt
 }
 
 
-function OwnerNavbar ({ auth, clicked, setClicked }) {
+function OwnerNavbar ({ auth }) {
+// function OwnerNavbar ({ auth, clicked, setClicked }) {
     return (
         <div>
             {auth.user.role === 'owner' ? 

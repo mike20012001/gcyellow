@@ -123,14 +123,15 @@ const SingleMenu = ({ inSingleMenu, useState, useEffect}) => {
         <div className="priceDifferBySize_wrap"
             key={inSingleMenu._id}
             style={{display:'flex', flexDirection:'column', margin:'10px 0'}}>
-            <button onClick={() => setEditDisabled(!editDisabled)}>수정하기</button>
+                    <button className="edit_button_sub" onClick={() => setEditDisabled(!editDisabled)}>
+                        {editDisabled ?<p style={{background:'red', color:'#fefefe', fontWeight:'bold', fontSize:'14px', padding: '3px'}}>메뉴정보 수정</p> : <p style={{background:'gray', fontWeight:'bold', fontSize:'14px', padding:'3px'}}>취소</p>}
+                    </button>
             <label className="menu_title" style={{background:'#333333', color:'#fefefe'}}>메뉴명
                 <input 
                     defaultValue={inSingleMenu.foodNameNonFranchise} 
                     value={foodNameNonFranchise}
                     disabled={editDisabled}
                     />
-                    <button>수겆ㅇ</button>
                 </label>
 
             <label className="menu_title">메뉴설명
@@ -314,7 +315,7 @@ const SingleMenu = ({ inSingleMenu, useState, useEffect}) => {
                 </div>
             ))}     
             </div> : 
-            <div style={{display:'flex', justifyContent:'center', flexDirection:'column', textAlign:'center', alignItems:'center'}}>
+            <div style={{display:'flex', justifyContent:'center', flexDirection:'column', textAlign:'center', alignItems:'center', color:'#fefefe'}}>
                 <p>"추가옵션" 추가하기</p>
                      <button onClick={() => addOptionsField()} disabled={editDisabled} style={{fontSize:'40px', cursor:'pointer'}}><i className="fas fa-plus-circle" style={{color:'green'}}></i></button>
             </div>
@@ -323,7 +324,9 @@ const SingleMenu = ({ inSingleMenu, useState, useEffect}) => {
         <label className="priceDifferBySize_wrap"> 기본 제공 (콜라, 소스 등)
             <div style={{display:'flex', justifyContent:'flex-end', position:'relative', top:'-20px', alignItems:'center'}}>추가 / 삭제
                 <button onClick={() => addComesWithField()} disabled={editDisabled} style={{width:'30px', textAlign:'center', fontSize:'20px', cursor:'pointer'}}><i className="fas fa-plus-circle" style={{color:'green'}}></i></button>
+                {comesWith !== null ?
                 <button onClick={() => deleteComesWithField()} disabled={editDisabled} style={{width:'30px', textAlign:'center', fontSize:'20px', cursor:'pointer'}}><i className="fas fa-minus-circle" style={{color:'red'}}></i></button>
+                : "" }
             </div>
             {comesWith !== null ?
             <div className="priceDifferBySize_wrap">{comesWith.map((c, index) => (
@@ -352,7 +355,7 @@ const SingleMenu = ({ inSingleMenu, useState, useEffect}) => {
                 </div>
                 
             ))}</div> :  
-            <div style={{display:'flex', justifyContent:'center', flexDirection:'column', textAlign:'center', alignItems:'center'}}>
+            <div style={{display:'flex', justifyContent:'center', flexDirection:'column', textAlign:'center', alignItems:'center', color:'#fefefe'}}>
             <p>"기본제공 메뉴" 추가하기</p>
                  <button onClick={() => addComesWithField()} disabled={editDisabled} style={{fontSize:'40px', cursor:'pointer'}}><i className="fas fa-plus-circle" style={{color:'green'}}></i></button>
         </div>}

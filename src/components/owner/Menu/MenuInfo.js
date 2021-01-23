@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { getFoodList } from '../../../actions/menuActions';
 import Beverage from './Menus/Beverage';
 import Seasonalmenu from './Menus/Seasonalmenu';
-import Setmenu from './Menus/Setmenu';
+// import Setmenu from './Menus/Setmenu';
 import Sidemenu from './Menus/Sidemenu';
 import Singlemenu from './Menus/Singlemenu';
 
@@ -11,18 +10,21 @@ import Singlemenu from './Menus/Singlemenu';
 const MenuInfo = () => {
     const dispatch = useDispatch();
 
-    const restaurantId = useSelector( (state) => state.auth.user.restaurant )
+    // const restaurantId = useSelector((state) => state.auth.user.restaurant )
     const menuInfo = useSelector((state) => state.restaurant[0])
+    const restaurantId = useSelector((state) => state.auth.user.restaurant)
 
-    useEffect(() => {
-        // dispatch해서 menu에 있는 restaurantId를 검색후 가지고 옴. 혹은 franchise는 restaurant code 혹은 id를 가지고 옴.
-        dispatch(getFoodList(restaurantId))
-        return () => {}
-    }, [dispatch, restaurantId])
 
-    useEffect(() => {
-        return () => {}
-    }, [])
+
+    // useEffect(() => {
+    //     // dispatch해서 menu에 있는 restaurantId를 검색후 가지고 옴. 혹은 franchise는 restaurant code 혹은 id를 가지고 옴.
+    //     dispatch(getFoodList(restaurantId))
+    //     return () => {}
+    // }, [dispatch, restaurantId])
+
+    // useEffect(() => {
+    //     return () => {}
+    // }, [])
 
     // console.log(menuInfo)
     // console.log('키 찾기', menuInfo.singleMenu)
@@ -37,7 +39,7 @@ const MenuInfo = () => {
             <p style={{textAlign:'center', fontSize:'18px', marginTop:'40px'}}>단품메뉴</p>
             {menuInfo.singleMenu.map(c => (
                 <div key={c._id}>
-                <Singlemenu menuInfo={c} singleMenus={c.singleMenu} dispatch={dispatch} useEffect={useEffect} useState={useState}/>
+                <Singlemenu menuInfo={c} singleMenus={c.singleMenu} restaurantId={restaurantId} dispatch={dispatch} useEffect={useEffect} useState={useState}/>
                 </div>
                 )
                 )}
