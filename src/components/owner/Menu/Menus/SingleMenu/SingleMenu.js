@@ -5,13 +5,13 @@ const SingleMenu = ({ inSingleMenu, useState, useEffect}) => {
     // console.log('InSingleMenu', inSingleMenu)
     const [ editDisabled, setEditDisabled ] = useState(true)
 
-    const [ foodPriceBySize, setFoodPriceBySize ] = useState([{ ...inSingleMenu.foodPriceBySize}])
+    // const [ foodPriceBySize, setFoodPriceBySize ] = useState([{ ...inSingleMenu.foodPriceBySize}])
     
     const [ options, setOptions ] = useState([{ ...inSingleMenu.options }])
     
     const [ comesWith, setComesWith ] = useState([{ ...inSingleMenu.comesWith }])
 
-    const { regular, regularPromo } = foodPriceBySize
+    // const { regular, regularPromo } = foodPriceBySize
     // if(options === null) {
     //     const { optionName:, optionDetail, optionCost } = options
     // } else {
@@ -20,7 +20,7 @@ const SingleMenu = ({ inSingleMenu, useState, useEffect}) => {
     // const { name, pcs } = comesWith
     
     const {
-        franchiseSetMenuUid,
+        // franchiseSetMenuUid,
         foodNameNonFranchise, 
         foodPhotoNonFranchise, 
         foodDescNonFranchise,
